@@ -50,9 +50,9 @@ export default function Navigation() {
           <Container size="1">
             <Flex direction="column" gap="6">
               <BigLink href="/" onClick={onClickLink}>About</BigLink>
-              <BigLink href="/writing" onClick={onClickLink}>Writing</BigLink>
               <BigLink href="/work" onClick={onClickLink}>Work</BigLink>
-              <BigLink href="/resume" onClick={onClickLink}>Resume</BigLink>
+              <BigLink href="/writing" onClick={onClickLink}>Writing</BigLink>
+              <BigLink href="/milo_knowles_cv.pdf" onClick={onClickLink}>Resume</BigLink>
             </Flex>
           </Container>
         </nav>

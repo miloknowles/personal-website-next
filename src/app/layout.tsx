@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Button, Flex, Section, Text, Theme } from '@radix-ui/themes';
+import { Theme } from '@radix-ui/themes';
 
 import '@radix-ui/themes/styles.css';
 
 import './globals.css';
-import Link from 'next/link';
+
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
         <Theme appearance="dark">
           <Navigation/>
           {children}
+          <Footer/>
         </Theme>
       </body>
     </html>

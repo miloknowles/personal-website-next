@@ -1,3 +1,4 @@
+import VisualSection from '@/components/Visual/section';
 import { Box, Container, Flex, Grid, Heading, Section, Text } from '@radix-ui/themes';
 import Image from 'next/image';
 
@@ -27,7 +28,7 @@ export default function Home() {
     <main className="">
       <Section size="3">
         <Container size="4">
-          <Flex direction="column" gap="9">
+          <Flex direction="column" gap="6">
 
             <Grid columns="2" gap="6" width="auto">
               <Flex direction="column" gap="3">
@@ -35,10 +36,14 @@ export default function Home() {
                   Hi, I'm Milo – a software engineer focused on climate and the food system.
                 </Heading>
                 <Text>
-                  I studied computer science and artifical intelligence at MIT, where I did research on computer vision for autonomous robots. I've worked autonomous cars/drones, seaweed-farming robots, data science for the energy grid, and full-stack web.
+                  I studied computer science and artifical intelligence at MIT, where I did computer vision
+                  research. I've worked on autonomous cars/drones, data science for the energy grid,
+                  carbon crediting for sustainable food, and full-stack web.
                 </Text>
                 <Text>
-                  After leaving college, I started to spend more and more of my time thinking about the connections between climate change and the food system – in particular, the ethical and ecological implications of eating 70+ billion animals each year.
+                  After leaving college, I started to spend more and more of my time thinking about the connections
+                  between climate change and the food system – in particular, the ethical and ecological implications
+                  of eating 70+ billion animals each year.
                 </Text>
                 <Text>
                   Outside of work, I love training, and you'll usually find me biking, running, or at the pool.
@@ -48,15 +53,18 @@ export default function Home() {
               </Flex>
             </Grid>
 
-            <Grid columns="4" gap="4" style={{minHeight: 400}}>
+            {/* <Grid columns="4" gap="4" style={{minHeight: 400}}>
               <ResponsiveImage src="/tall.jpg" alt="A picture of me"/>
               <ResponsiveImage src="/redwoods.jpg" alt="A picture of me"/>
-              {/* <ResponsiveImage src="/running4.jpg" alt="A picture of me"/> */}
+              <ResponsiveImage src="/running4.jpg" alt="A picture of me"/>
               <ResponsiveImage src="/timberman.jpg" alt="A picture of me"/>
-            </Grid>
+            </Grid> */}
 
           </Flex>
         </Container>
+      </Section>
+      <Section size="2">
+        <VisualSection/>
       </Section>
     </main>
   )
