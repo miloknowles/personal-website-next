@@ -1,5 +1,5 @@
-import { InfoCircledIcon, RocketIcon } from '@radix-ui/react-icons';
-import { Box, Callout, CalloutIcon, CalloutRoot, CalloutText, Container, Flex, Grid, Heading, Section, Text } from '@radix-ui/themes';
+import { RocketIcon } from '@radix-ui/react-icons';
+import { CalloutIcon, CalloutRoot, CalloutText, Container, Flex, Grid, Heading, Section, Text } from '@radix-ui/themes';
 import Image from 'next/image';
 
 

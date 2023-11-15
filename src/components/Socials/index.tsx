@@ -4,6 +4,7 @@ import { FaStrava } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import Link from "next/link";
 
+
 function LinkIcon(props: { href: string, children: any }) {
   return (
     <Link href={props.href} target="_blank">

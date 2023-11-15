@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-// import { Inter } from 'next/font/google';
 
 import '@radix-ui/themes/styles.css';
 // https://www.radix-ui.com/themes/docs/theme/token-reference
@@ -11,8 +10,6 @@ import './globals.css';
 
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-
-// const inter = Inter({ subsets: ['latin'] });
 
 import { Circular } from '@/app/fonts/index';
 
