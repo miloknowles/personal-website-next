@@ -33,7 +33,7 @@ export default function Home() {
           <Flex direction="column" gap="6">
             <Flex gap="6"> 
             <Heading size="9" style={{maxWidth: "800px"}}>
-              Hi, I'm <span style={{color: "var(--gold-10)"}}>Milo</span> – a software engineer focused on climate and the food system.
+              Hi, I'm <span style={{color: "var(--jade-10)"}}>Milo</span> – a software engineer focused on climate and the food system.
             </Heading>
             </Flex>
             <Grid columns={{initial: "1", md: "2"}} gap="6" width="auto">
@@ -59,7 +59,7 @@ export default function Home() {
                   Outside of work, I love training and geeking out about endurance sports.
                   You'll usually find me biking, running, or at the pool.
                 </Text>
-                <CalloutRoot color="gold">
+                <CalloutRoot color="jade">
                   <CalloutIcon>
                     <RocketIcon/>
                   </CalloutIcon>
@@ -72,7 +72,7 @@ export default function Home() {
             </Grid>
             <Grid columns={{initial: "1", sm: "2"}} gap={{initial: "3", sm: "4", md: "5"}}>
               <ResponsiveImage src="/gray.jpg" alt="A picture of me" style={{minHeight: "500px"}}/>
-              <ResponsiveImage src="/triathlon.jpg" alt="Finishing 70.3 Timberman" style={{minHeight: "500px"}}/>
+              <ResponsiveImage src="/triathlon_gray.jpg" alt="Finishing 70.3 Timberman" style={{minHeight: "500px"}}/>
             </Grid>
           </Flex>
         </Container>
