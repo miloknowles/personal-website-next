@@ -4,6 +4,7 @@ import { Cross1Icon, HamburgerMenuIcon, SunIcon } from "@radix-ui/react-icons";
 import { Box, Container, Flex, Heading, IconButton, Section } from "@radix-ui/themes";
 import Link from "next/link";
 import { useState } from "react";
+import Socials from "@/components/Socials";
 
 
 const BigLink = (props: { href: string, children: any, onClick?: () => void }) => {
@@ -26,9 +27,9 @@ export default function Navigation() {
     <header style={{zIndex: 2000, position: "sticky"}}> 
       <nav style={{width: "100%", borderBottom: "2px solid var(--color-panel-solid)", display: "flex"}}>
         <Flex p="4" gap="4" ml="auto">
-          <IconButton size="3" variant="ghost" color="gray">
+          {/* <IconButton size="3" variant="ghost" color="gray">
             <SunIcon width="32" height="32"/>
-          </IconButton>
+          </IconButton> */}
           <IconButton size="3" variant="ghost" onClick={() => setOpen(!open)} style={{zIndex: 5000}} color="gray">
             {
               open ?
@@ -47,12 +48,15 @@ export default function Navigation() {
         backgroundColor: "var(--color-background)"
       }}>
         <nav style={{display: open ? "inherit" : "none"}}>
-          <Container size="1">
+          <Container size="1" p={{initial: "4", md: "0"}}>
             <Flex direction="column" gap="6">
               <BigLink href="/" onClick={onClickLink}>About</BigLink>
               <BigLink href="/work" onClick={onClickLink}>Work</BigLink>
               <BigLink href="/writing" onClick={onClickLink}>Writing</BigLink>
               <BigLink href="/milo_knowles_cv.pdf" onClick={onClickLink}>Resume</BigLink>
+              <Flex>
+                <Socials size={64} color="white"/>
+              </Flex>
             </Flex>
           </Container>
         </nav>

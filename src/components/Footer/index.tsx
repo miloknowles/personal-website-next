@@ -1,34 +1,31 @@
-import { EnvelopeOpenIcon, GitHubLogoIcon, InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { Flex, IconButton, Section, Text } from "@radix-ui/themes";
-import { IconBrandStrava } from "@tabler/icons-react";
+import { FaStrava } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 import Link from "next/link";
+import Socials from "@/components/Socials";
+
+
+function LinkIcon(props: { href: string, children: any }) {
+  return (
+    <Link href={props.href} target="_blank">
+      <IconButton variant="ghost">
+        {props.children}
+      </IconButton>
+    </Link>
+  )
+}
 
 
 export default function Footer() {
   return (
     <Section size="1" pl="5" pr="5">
-      <Flex width="100%" className="justify-between">
-        <Flex gap="3">
-          <IconButton variant="ghost">
-            <LinkedInLogoIcon width="28" height="28" color="gray"/>
-          </IconButton>
-          <IconButton variant="ghost">
-            <GitHubLogoIcon width="28" height="28" color="gray"/>
-          </IconButton>
-          <IconButton variant="ghost">
-            <InstagramLogoIcon width="28" height="28" color="gray"/>
-          </IconButton>
-          <IconButton variant="ghost">
-            <IconBrandStrava width="28" height="28" color="gray"/>
-          </IconButton>
-          <IconButton variant="ghost">
-            <EnvelopeOpenIcon width="28" height="28" color="gray"/>
-          </IconButton>
-        </Flex>
-        <Text size="2" color="gray">"It takes nothing away from a human to be kind to an animal."</Text>
-        <Link href="github.com/miloknowles">
-          <Text size="2" color="gray">Built using Next.js</Text>
+      <Flex width="100%" className="justify-between" direction={{initial: "column", sm: "row"}} gap="3">
+        <Link href="https://github.com/miloknowles">
+          <Text size="1" color="gray">Built using Next.js</Text>
         </Link>
+        <Text size="1" color="gray"><i>"It takes nothing away from a human to be kind to an animal."</i></Text>
+        <Socials size={24}/>
       </Flex>
     </Section>
   );
