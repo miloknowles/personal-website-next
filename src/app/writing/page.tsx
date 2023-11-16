@@ -4,7 +4,7 @@ import { Container, Flex, Heading, Link, Section, Separator, Text } from "@radix
 export default function Page() {
   return (
     <main>
-      <Section size={{initial: "1", md: "3"}}>
+      <Section size={{initial: "1", md: "3"}} pl="3" pr="3">
         <Container size="3">
           <Flex direction="column" gap="7">
             <Heading size="9">
