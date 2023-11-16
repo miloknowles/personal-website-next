@@ -6,26 +6,24 @@ import { IconAlertCircleFilled } from "@tabler/icons-react";
 export default function Page() {
   return (
     <main>
-      <Section size="3">
+      <VisualSection/>
+      <Section size={{initial: "1", md: "2", lg: "3"}} pl="3" pr="3">
         <Container size="4">
           <Flex direction="column" gap="3">
             <Heading size="9">Work</Heading>
-            <CalloutRoot color="indigo">
+            <CalloutRoot color="gray">
               <CalloutIcon>
                 <IconAlertCircleFilled/>
               </CalloutIcon>
               <CalloutText>
-                This page is still under development.
+                This page is still under development. Check back later...
               </CalloutText>
             </CalloutRoot>
           </Flex>
         </Container>
       </Section>
-      <Section size="2">
-        <VisualSection/>
-      </Section>
-
-      <Section size="2">
+      
+      {/* <Section size="2">
         <Container size="4">
           <Flex direction="column" gap="3">
             <Heading size="8">Web Development</Heading>
@@ -53,7 +51,7 @@ export default function Page() {
             </Text>
           </Flex>
         </Container>
-      </Section>
+      </Section> */}
     </main>
   );
 }

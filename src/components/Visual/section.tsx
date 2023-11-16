@@ -2,8 +2,9 @@
 
 import dynamic from 'next/dynamic';
 
-import { Button, Container, Group, Modal, SegmentedControl, Slider, Stack, Text, createStyles } from "@mantine/core";
+import { Container, SegmentedControl, createStyles } from "@mantine/core";
 import { useState } from "react";
+import { Button, DialogContent, DialogDescription, DialogRoot, DialogTitle, DialogTrigger, Flex, Text, Slider, DialogClose, Dialog } from '@radix-ui/themes';
 
 import React from 'react';
 // @ts-ignore
@@ -12,8 +13,8 @@ import { useCounter, useDisclosure } from "@mantine/hooks";
 
 const DEFAULT_ALPHA = 0.2;
 const DEFAULT_NUM_NODES = 100;
-const DEFAULT_NODES_PER_SEC = 50;
-const DEFAULT_CIRCLE_RADIUS = 5;
+const DEFAULT_NODES_PER_SEC = 100;
+const DEFAULT_CIRCLE_RADIUS = 7;
 
 type ColorMap = "turbo" | "inferno";
 
@@ -21,9 +22,10 @@ type ColorMap = "turbo" | "inferno";
 const useStyles = createStyles((theme) => ({
   mainVisualContainer: {
     marginTop: "-16px",
-    height: "calc(100vh - 90px)",
+    height: "calc(100vh - 80px)",
     // height: "100%",
     padding: 0,
+    fontFamily: "var(--font-circular)"
     // boxShadow: "1px 2px 5px rgba(0, 0, 0, 0.05)"
     // backgroundColor: theme.colorScheme === "light" ? "white" : theme.colors.dark[8],
     // filter: "drop-shadow(0.3rem 0.3rem 0.2rem rgba(0, 0, 0, 0.1))"
@@ -65,82 +67,99 @@ export default function VisualSection() {
       counter={counter}
       root={[0.5, 0.5]}
     />
-    <Modal
-      opened={opened}
-      onClose={() => {
-        close();
-        increment();
-      }}
-      radius="sm"
-      title={<Text fw={"bold"}>Rapidly-Exploring Random Trees (RRT)</Text>}
-      centered
-    >
-      <Stack>
-        <Group>
-          <Text fw={"bold"}>number of leaves</Text>
-          <Text>The size of the final tree</Text>
-        </Group>
-        <Slider label={v => v} min={10} max={1000} step={1} value={numNodes} onChange={setNumNodes}/>
+    <DialogRoot open={opened}>
+      <DialogContent>
+        <DialogTitle>
+          Rapidly-Exploring Random Trees (RRT)
+        </DialogTitle>
+        <Flex direction="column" gap="5" pt="4">
+          <Flex direction="column" gap="2">
+            <Flex gap="3">
+              <Text weight={"bold"}>number of leaves</Text>
+              <Text color="gray">The size of the final tree</Text>
+            </Flex>
+            <Slider min={10} max={500} step={1} value={[numNodes]} onValueChange={(v) => setNumNodes(v[0])}/>
+          </Flex>
 
-        <Group>
-          <Text fw={"bold"}>iterations/sec</Text>
-          <Text>How fast the tree grows</Text>
-        </Group>
-        <Slider label={v => v} min={1} max={200} step={1} value={nodesPerSec} onChange={setNodesPerSec}/>
+          <Flex direction="column" gap="2">
+            <Flex gap="3">
+              <Text weight={"bold"}>iterations/sec</Text>
+              <Text>How fast the tree grows</Text>
+            </Flex>
+            <Slider min={1} max={200} step={1} value={[nodesPerSec]} onValueChange={(v) => setNodesPerSec(v[0])}/>
+          </Flex>
 
-        <Group>
-          <Text fw={"bold"}>alpha</Text>
-          <Text>How aggressively the tree grows</Text>
-        </Group>
-        <Slider label={v => v} min={0.1} max={1.0} value={alpha} onChange={setAlpha} step={0.01}/>
+          <Flex direction="column" gap="2">
+            <Flex gap="3">
+              <Text weight={"bold"}>alpha</Text>
+              <Text>How aggressively the tree grows</Text>
+            </Flex>
+            <Slider min={0.05} max={1.0} value={[alpha]} onValueChange={(v) => setAlpha(v[0])} step={0.01}/>
+          </Flex>
 
-        <Group>
-          <Text fw={"bold"}>leaf radius</Text>
-          <Text>Size of the circles</Text>
-        </Group>
-        <Slider label={v => v} min={1} max={20} step={0.1} value={circleRadius} onChange={setCircleRadius}/>
+          <Flex direction="column" gap="2">
+            <Flex gap="3">
+              <Text weight={"bold"}>leaf radius</Text>
+              <Text>Size of the circles</Text>
+            </Flex>
+            <Slider min={1} max={20} step={0.1} value={[circleRadius]} onValueChange={(v) => setCircleRadius(v[0])}/>
+          </Flex>
 
-        <Group>
-          <Text fw={"bold"}>colormap</Text>
-          <Text>Based on distance from the root</Text>
-        </Group>
-        <SegmentedControl
-          value={colorMap}
-          onChange={(value) => setColorMap(value as ColorMap)}
-          size="xs"
-          data={[
-            {
-              value: 'turbo',
-              label: <Text fw={"normal"}>turbo</Text>
-            },
-            {
-              value: 'inferno',
-              label: <Text fw={"normal"}>inferno</Text>
-            },
-            {
-              value: 'rainbow',
-              label: <Text fw={"normal"}>rainbow</Text>
-            },
-            {
-              value: 'spectral',
-              label: <Text fw={"normal"}>spectral</Text>
-            },
-            {
-              value: 'sinebow',
-              label: <Text fw={"normal"}>sinebow</Text>
-            },
-          ]}
-        />
-      </Stack>
-    </Modal>
+          <Flex direction="column" gap="2">
+            <Flex gap="3">
+              <Text weight={"bold"}>colormap</Text>
+              <Text>Based on distance from the root</Text>
+            </Flex>
+            <SegmentedControl
+              value={colorMap}
+              onChange={(value) => setColorMap(value as ColorMap)}
+              size="xs"
+              color="gray"
+              data={[
+                {
+                  value: 'turbo',
+                  label: <Text weight={"regular"}>turbo</Text>
+                },
+                {
+                  value: 'inferno',
+                  label: <Text weight={"regular"}>inferno</Text>
+                },
+                {
+                  value: 'rainbow',
+                  label: <Text weight={"regular"}>rainbow</Text>
+                },
+                {
+                  value: 'spectral',
+                  label: <Text weight={"regular"}>spectral</Text>
+                },
+                {
+                  value: 'sinebow',
+                  label: <Text weight={"regular"}>sinebow</Text>
+                },
+              ]}
+            />
+          </Flex>
+          <Flex>
+            <Button
+              variant="soft"
+              color="gray"
+              onClick={() => {
+              increment();
+              close();
+              }} ml="auto"
+            >Close</Button>
+          </Flex>
+        </Flex>
+      </DialogContent>
+    </DialogRoot>
+
     <Button
-      variant="subtle"
-      size="xs"
-      sx={{position: "absolute", bottom: 24, right: 24, zIndex: 5}}
-      leftIcon={<IconAdjustments size={"1rem"} stroke={1.5}/>}
+      variant="solid"
+      style={{position: "absolute", bottom: 24, right: 24, zIndex: 5}}
+      size="2"
       onClick={open}
     >
-      Adjust Parameters
+      <IconAdjustments size={"1rem"} stroke={1.5}/> Adjust Parameters
     </Button>
   </Container>
   )

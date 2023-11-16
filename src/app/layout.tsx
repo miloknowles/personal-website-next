@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={Circular.variable}>
-        <Theme appearance="dark">
+        <Theme appearance="dark" accentColor="indigo" radius="small">
           <Navigation/>
           {children}
           <Footer/>
