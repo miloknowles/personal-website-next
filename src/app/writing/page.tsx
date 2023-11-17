@@ -1,4 +1,11 @@
 import { Container, Flex, Heading, Link, Section, Separator, Text } from "@radix-ui/themes";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: 'Milo Knowles | Writing',
+  description: "Blog posts, papers, and other things I'm thinking about.",
+}
 
 
 export default function Page() {

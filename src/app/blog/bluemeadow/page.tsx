@@ -1,5 +1,12 @@
 import { Text, Heading, Flex, Code, Container, Section, Strong } from "@radix-ui/themes";
+import { Metadata } from "next";
 import Link from "next/link";
+
+
+export const metadata: Metadata = {
+  title: 'Blue Meadow: What I learned from a year as a solo founder',
+  description: "Over the past 15 months, I took an unexpected detour in my life to work on a startup.",
+}
 
 
 export default function Post() {

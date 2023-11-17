@@ -13,9 +13,10 @@ import Footer from '@/components/Footer';
 
 import { Circular } from '@/app/fonts/index';
 
+
 export const metadata: Metadata = {
   title: 'Milo Knowles',
-  description: "Milo Knowles' personal website",
+  description: "I'm a software engineer focused on climate and the food system.",
 }
 
 
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={Circular.variable}>
-        <Theme appearance="dark" accentColor="indigo" radius="small">
+        <Theme appearance="dark" accentColor="indigo" radius="medium">
           <Navigation/>
           {children}
           <Footer/>

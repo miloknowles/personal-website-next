@@ -1,6 +1,13 @@
 import VisualSection from "@/components/Visual/section";
 import { CalloutIcon, CalloutRoot, CalloutText, Container, Flex, Heading, Section, Text } from "@radix-ui/themes";
 import { IconAlertCircleFilled } from "@tabler/icons-react";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: 'Milo Knowles | Work',
+  description: "Here are some examples of things I've worked on.",
+}
 
 
 export default function Page() {
