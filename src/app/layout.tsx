@@ -34,7 +34,7 @@ export default function RootLayout({
         />
       </head>
       <body className={Circular.variable}>
-        <Theme appearance="dark" accentColor="indigo" radius="medium">
+        <Theme appearance="dark" accentColor="jade" radius="medium">
           <Navigation/>
           {children}
           <Footer/>
