@@ -7,9 +7,9 @@ import { useState } from "react";
 import Socials from "@/components/Socials";
 
 
-const BigLink = (props: { href: string, children: any, onClick?: () => void }) => {
+const BigLink = (props: { href: string, target?: string, children: any, onClick?: () => void }) => {
   return (
-    <Link href={props.href} onClick={props.onClick}>
+    <Link href={props.href} onClick={props.onClick} target={props.target}>
       <Heading size="9">{props.children}</Heading>
     </Link>
   );
@@ -53,7 +53,7 @@ export default function Navigation() {
               <BigLink href="/" onClick={onClickLink}>About</BigLink>
               <BigLink href="/work" onClick={onClickLink}>Work</BigLink>
               <BigLink href="/writing" onClick={onClickLink}>Writing</BigLink>
-              <BigLink href="/milo_knowles_cv.pdf" onClick={onClickLink}>Resume</BigLink>
+              <BigLink href="https://resume.io/r/NGZYn7sIv" onClick={onClickLink} target={"_blank"}>Resume</BigLink>
               <Flex>
                 <Socials size={64} color="white"/>
               </Flex>

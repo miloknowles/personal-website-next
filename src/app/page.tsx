@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 const ResponsiveImage = (props: { src: string, alt: string, style: any }) => (
   <div
+    className="shadow-lg"
     style={{
       position: "relative",
       objectPosition: "top",
@@ -33,7 +34,7 @@ export default function Home() {
           <Flex direction="column" gap="6">
             <Flex gap="6"> 
             <Heading size="9" style={{maxWidth: "800px"}}>
-              Hi, I'm <span style={{color: "var(--jade-10)"}}>Milo</span> – a software engineer focused on climate and the food system.
+              Hi, I'm <span style={{color: "var(--gray-10)"}}>Milo</span> – a software engineer focused on climate and the food system.
             </Heading>
             </Flex>
             <Grid columns={{initial: "1", md: "2"}} gap="6" width="auto">
@@ -59,7 +60,7 @@ export default function Home() {
                   Outside of work, I love training and geeking out about endurance sports.
                   You'll usually find me biking, running, or at the pool.
                 </Text>
-                <CalloutRoot color="jade">
+                <CalloutRoot color="gray">
                   <CalloutIcon>
                     <RocketIcon/>
                   </CalloutIcon>
@@ -70,11 +71,16 @@ export default function Home() {
                 </CalloutRoot>
               </Flex>
             </Grid>
-            <Grid columns={{initial: "1", sm: "2"}} gap={{initial: "3", sm: "4", md: "6"}}>
-              <ResponsiveImage src="/gray.jpg" alt="A picture of me" style={{minHeight: "500px"}}/>
-              <ResponsiveImage src="/triathlon_gray.jpg" alt="Finishing 70.3 Timberman" style={{minHeight: "500px"}}/>
-            </Grid>
           </Flex>
+        </Container>
+      </Section>
+      <Section size={{initial: "1", lg: "2"}} pl="3" pr="3">
+        <Container size="3">
+          <Grid columns={{initial: "1", sm: "3"}} gap={{initial: "3", sm: "4", md: "6"}}>
+            <ResponsiveImage src="/color.jpg" alt="A picture of me" style={{minHeight: "400px"}}/>
+            <ResponsiveImage src="/redwoods.jpg" alt="A picture of me" style={{minHeight: "400px"}}/>
+            <ResponsiveImage src="/triathlon_color.jpg" alt="Finishing 70.3 Timberman" style={{minHeight: "400px"}}/>
+          </Grid>
         </Container>
       </Section>
     </main>
