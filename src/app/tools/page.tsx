@@ -35,10 +35,10 @@ export default function Page() {
     <main className="min-h-screen">
       <Section size={{initial: "1", lg: "2"}} pl="3" pr="3">
         <Container size="4">
-          <Flex direction="column" gap="4" className="max-w-xl">
+          <Flex direction="column" gap="4" className="max-w-lg">
             <Heading size="9">Triathlon Tools</Heading>
             <Text>These are some tools I've been developing to help myself train and
-              race. If you have suggestions, feedback, or bugs, feel free
+              race triathlons. If you have suggestions, feedback, or bugs, feel free
               to <RadixLink href="mailto:miloknowles97@gmail.com">let me know.</RadixLink></Text>
           </Flex>
           <Grid columns={{initial: "1", md: "3"}} mt="6" gap="4">
