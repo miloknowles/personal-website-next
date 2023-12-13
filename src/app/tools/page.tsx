@@ -1,8 +1,15 @@
 import { Avatar, Container, Flex, Grid, Heading, Section, Text } from "@radix-ui/themes";
 
 import { Link as RadixLink } from "@radix-ui/themes";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+
+
+export const metadata: Metadata = {
+  title: 'Triathlon Tools',
+  description: "These are some tools that I've been developing to help myself train and race.",
+}
 
 
 const Card = (props: { t: string, d: string, abbrev: string, color?: string, href: string }) => (
