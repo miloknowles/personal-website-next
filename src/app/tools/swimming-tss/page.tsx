@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import SwimmingTSSTool from "./client";
+import Tool from "./client";
 
 
 export const metadata: Metadata = {
@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <SwimmingTSSTool/>
+    <Tool/>
   )
 }
