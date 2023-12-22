@@ -1,6 +1,4 @@
 .radix-themes {
-  --default-font-family: var(--font-circular);
-  --heading-font-family: var(--font-circular);
 }
 
 @keyframes fadeInUp {

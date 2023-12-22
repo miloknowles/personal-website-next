@@ -11,13 +11,15 @@ import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
-import { Circular } from '@/app/fonts/index';
+import { Inter } from 'next/font/google'
 
 
 export const metadata: Metadata = {
   title: 'Milo Knowles',
   description: "I'm a software engineer focused on climate and the food system.",
 }
+
+const inter = Inter({ subsets: ['latin'] })
 
 
 export default function RootLayout({
@@ -33,7 +35,7 @@ export default function RootLayout({
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>"
         />
       </head>
-      <body className={Circular.variable}>
+      <body className={inter.className}>
         <Theme appearance="dark" accentColor="indigo" radius="medium">
           <Navigation/>
           {children}
