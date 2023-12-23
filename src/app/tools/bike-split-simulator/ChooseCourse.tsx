@@ -17,25 +17,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { COURSES } from "./courses"
  
-const course = [
-  {
-    value: "SantaCruz_703",
-    label: "Santa Cruz 70.3",
-  },
-  {
-    value: "StGeorge_703",
-    label: "St. George 70.3",
-  },
-  {
-    value: "Healeakala_Climb",
-    label: "Haleakala KOM",
-  },
-]
- 
-export default function ChooseCourse() {
+
+export default function ChooseCourse(props: { value: any, setValue: (value: string) => void }) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  // const [value, setValue] = React.useState("")
  
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -46,8 +33,8 @@ export default function ChooseCourse() {
           aria-expanded={open}
           className="w-full justify-between"
         >
-          {value
-            ? course.find((framework) => framework.value === value)?.label
+          {props.value
+            ? COURSES.find((option) => option.value === props.value)?.label
             : "Choose your course"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -55,24 +42,25 @@ export default function ChooseCourse() {
       <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandInput placeholder="Search by name..." />
-          <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandEmpty>No option found.</CommandEmpty>
           <CommandGroup>
-            {course.map((framework) => (
+            {COURSES.map((option) => (
               <CommandItem
-                key={framework.value}
-                value={framework.value}
+                key={option.value}
+                value={option.value}
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue)
-                  setOpen(false)
+                  console.log(currentValue);
+                  props.setValue(currentValue === props.value ? "" : currentValue);
+                  setOpen(false);
                 }}
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === framework.value ? "opacity-100" : "opacity-0"
+                    props.value === option.value ? "opacity-100" : "opacity-0"
                   )}
                 />
-                {framework.label}
+                {option.label}
               </CommandItem>
             ))}
           </CommandGroup>
