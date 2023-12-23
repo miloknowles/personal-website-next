@@ -73,4 +73,10 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    "rounded-sm",
+    "rounded-md",
+    "rounded-lg",
+    "rounded-xl",
+  ]
 }
