@@ -80,8 +80,8 @@ const Label = (props: { title: string, units: string, description: any }) => {
 
 const Indicator = (props: { value: number, choices: { value: number, label: string, color: string }[], setValue: (v: number) => void }) => {
   const badges = props.choices.map((c, i) => (
-  
     <Badge
+      key={c.value}
       size="sm"
       color={(
         (i === 0 && props.value >= c.value) || // First option

@@ -9,7 +9,7 @@ import { COURSES } from "./courses";
 
 export default function ChooseCourse(props: { value: any, setValue: (value: string) => void }) { 
   const options = COURSES.map(v => (
-    <SearchSelectItem value={v.value}>
+    <SearchSelectItem value={v.value} key={v.value}>
       {v.label} {v.emoji}
     </SearchSelectItem>
   ));
