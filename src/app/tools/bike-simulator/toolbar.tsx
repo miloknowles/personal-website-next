@@ -105,7 +105,9 @@ interface IToolbarProps {
 
 
 export default function Toolbar({units, setUnits} : IToolbarProps) {
-  const baseUrl = process.env.NODE_ENV === "production" ? "https://todo.app" : "http://localhost:8000"
+  const baseUrl = process.env.NODE_ENV === "production" ?
+    "https://training-tools-plum.vercel.app/simulate" :
+    "http://localhost:8000";
   const [loading, setLoading] = useState(false);
 
   const { mutate } = useSWRConfig()
@@ -213,7 +215,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
       </Flex>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <Grid columns={{initial: "1", sm: "3", lg: "4"}} gap="5">
+        <Grid columns={{initial: "1", sm: "3", lg: "4"}} gap="6">
           <Flex gap="4" direction="column">
             <Heading size="7">Inputs</Heading>
             <FormField
