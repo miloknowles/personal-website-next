@@ -5,7 +5,7 @@ import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Card, Code, Flex, Grid, Heading, Separator, Text } from "@radix-ui/themes";
 import { Link as RadixLink } from "@radix-ui/themes";
 
-import { AreaChart, LineChart, Title } from "@tremor/react";
+import { AreaChart, LineChart, Select, SelectItem, Title } from "@tremor/react";
 
 import demoData from "./example.json";
 
@@ -33,11 +33,15 @@ const metersToFt = 3.28084;
 const metersToMi = 0.621371 / 1000;
 
 
-const ResultsDisplay = () => {
+interface IResultsDisplayProps {
+  units: "imperial" | "metric"
+}
+
+
+const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
   // This will initially fetch nothing, but see data in the cache once it's fetched.
-  // const { data, error } = useSWR<Results>('/api/simulate');
-  const data: Results = demoData;
-  const [units, setUnits] = useState<"imperial" | "metric">("imperial");
+  const { data, error } = useSWR<Results>('/api/simulate');
+  // const data: Results = demoData;
 
   if (!data) {
     return <></>;
@@ -48,9 +52,9 @@ const ResultsDisplay = () => {
   const elapsedM = Math.floor((elapsed - elapsedH*3600) / 60);
   const elapsedS = Math.floor(elapsed % 60);
 
-  const avgSpeed = data.avg_speed_m_per_s * 2.23694;
-  const totalGain = data.course_gain_m * 3.28084;
-  const totalDist = data.course_distance_m / 1000 * 0.621371;
+  const avgSpeed = data.avg_speed_m_per_s * (units === "metric" ? 3.6 : 2.23694);
+  const totalGain = data.course_gain_m * (units === "metric" ? 1 : 3.28084);
+  // const totalDist = data.course_distance_m / 1000 * 0.621371;
 
   const predFinish = `${elapsedH.toLocaleString("default", { minimumIntegerDigits: 2 })}:${elapsedM.toLocaleString("default", { minimumIntegerDigits: 2 })}:${elapsedS.toLocaleString("default", { minimumIntegerDigits: 2 })}`;
 
@@ -77,7 +81,7 @@ const ResultsDisplay = () => {
           <Button className="ml-auto">Download raw data</Button>
         </Flex>
         <Text size="1" className="text-muted-foreground">
-          Simulated <Code>{data.meta.compute_iters || "N/A"}</Code> data points
+          Simulated <Code>{data.meta.compute_iters || "N/A"}</Code> timesteps
           in <Code>{data.meta.compute_sec.toLocaleString("default", {maximumFractionDigits: 2}) || "N/A"} seconds</Code>
         </Text>
       </Flex>
@@ -88,11 +92,11 @@ const ResultsDisplay = () => {
         <MetricCard title="Total elevation gain" value={totalGain.toLocaleString("default", { maximumFractionDigits: 0 })} units={units === "metric" ? "m" : "ft"}/>
         <MetricCard title="Average drag losses" value={avgDragLosses.toLocaleString("default", { maximumFractionDigits: 1 })} units="watts"/>
         <MetricCard title="Average rolling losses" value={avgRollLosses.toLocaleString("default", { maximumFractionDigits: 1 })} units="watts"/>
-        <MetricCard title="Average gravity losses" value={avgGravLosses.toLocaleString("default", { maximumFractionDigits: 1 })} units="watts"/>
+        {/* <MetricCard title="Average gravity losses" value={avgGravLosses.toLocaleString("default", { maximumFractionDigits: 1 })} units="watts"/> */}
       </Grid>
 
       <Card className="w-full">
-        <Title>Elevation</Title>
+        <Title className="pl-2">Elevation</Title>
         <AreaChart
           className="h-48 mb-2"
           data={chartData}
@@ -103,38 +107,38 @@ const ResultsDisplay = () => {
           connectNulls={true}
           autoMinValue={true}
           showLegend={true}
-          showAnimation={true}
+          // showAnimation={true}
           valueFormatter={(v) => v.toLocaleString("default", { maximumFractionDigits: 0 }) + (units === "metric" ? " m" : " ft")}
         />
 
-        <Title>Velocity</Title>
+        <Title className="pl-2">Velocity</Title>
         <LineChart
           className="h-48 mb-2"
           data={chartData}
           index="t"
           categories={["v"]}
-          colors={["teal"]}
+          colors={["indigo"]}
           yAxisWidth={60}
           connectNulls={true}
           autoMinValue={true}
           showLegend={true}
-          showAnimation={true}
+          // showAnimation={true}
           valueFormatter={(v) => v.toLocaleString("default", { maximumFractionDigits: 1 }) + (units === "metric" ? " km/h" : " mph")}
         />
 
-        <Title>Power losses</Title>
+        <Title className="pl-2">Power losses</Title>
         <LineChart
           className="h-48 mb-2"
           data={chartData}
           index="t"
           categories={["P_drag", "P_roll", "P_grav"]}
-          colors={["blue", "rose", "amber"]}
+          colors={["blue", "red", "amber"]}
           yAxisWidth={60}
           connectNulls={true}
           autoMinValue={true}
           showLegend={true}
           valueFormatter={(v) => v.toLocaleString("default", { maximumFractionDigits: 1 }) + " W"}
-          showAnimation={true}
+          // showAnimation={true}
         />
       </Card>
     </Flex>
@@ -143,11 +147,13 @@ const ResultsDisplay = () => {
 
 
 export default function Tool() {
+  const [units, setUnits] = useState<"imperial" | "metric">("metric");
+
   return (
     <main className="min-h-screen px-6 py-5 gap-8 flex flex-col">
-      <Toolbar/>
+      <Toolbar units={units} setUnits={setUnits}/>
       <Separator size="4"/>
-      <ResultsDisplay/>
+      <ResultsDisplay units={units}/>
     </main>
   );
 }

@@ -29,9 +29,10 @@ import * as z from "zod"
 
 import useSWR, { useSWRConfig } from "swr"
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
-import { Badge, NumberInput } from "@tremor/react";
+import { Loader2, RulerIcon } from "lucide-react";
+import { Badge, NumberInput, Select, SelectItem, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@tremor/react";
 import { presetsCRR, presetsCdA, presetsDtl } from "./presets";
+import { IconCircle } from "@tabler/icons-react";
 
 
 const formSchema = z.object({
@@ -97,7 +98,13 @@ const Indicator = (props: { value: number, choices: { value: number, label: stri
 }
 
 
-export default function Toolbar() {
+interface IToolbarProps {
+  units: "imperial" | "metric"
+  setUnits: (units: "imperial" | "metric") => void
+}
+
+
+export default function Toolbar({units, setUnits} : IToolbarProps) {
   const baseUrl = process.env.NODE_ENV === "production" ? "https://todo.app" : "http://localhost:8000"
   const [loading, setLoading] = useState(false);
 
@@ -145,35 +152,65 @@ export default function Toolbar() {
   const _dtl = form.watch("loss_drivetrain");
 
   return (
-    <Flex direction="column" gap="6" justify="center" align="start">
-      <DialogRoot>
-        <DialogTrigger>
-          <Flex gap="4" align="center">
-            <Heading size="8">Bike Simulator</Heading>
-            <IconButton variant="ghost" radius="full">
-              <InfoCircledIcon width="24" height="24"/>
-            </IconButton>
-          </Flex>
-        </DialogTrigger>
-        <DialogContent>
-          <Flex direction="column" gap="4">
-            <Heading size="7">How to use the simulator</Heading>
-            <Text className="pt-2">
-              This tool predicts what your race time will be on a bike course, taking into
-              account the elevation profile and key parameters like your average power, CdA, and rolling resistance.
-            </Text>
-            <Text weight="medium" color="indigo">
-              You can use the tool to (1) estimate what a realistic bike split might be, and (2)
-              play with parameters to improve performance.
-            </Text>
-            <Text>
-              Internally, the simulator reads in a <Code>.gpx</Code> or <Code>.fit</Code> file, and then
-              simulates what would happen if you cycle at a constant race power. To see a derivation for
-              the physics equations, I'd recommend this <RadixLink href="https://www.gribble.org/cycling/power_v_speed.html">tool</RadixLink> by Steve Gribble.
-            </Text>
-          </Flex>
-        </DialogContent>
-      </DialogRoot>
+    <Flex direction="column" gap="6" justify="center" align="start" className="w-full">
+      <Flex direction="row" gap="4" className="w-full">
+        <DialogRoot>
+          <DialogTrigger >
+            <Flex gap="4" align="center">
+              <Heading size="8">Bike Simulator</Heading>
+              <IconButton variant="ghost" radius="full">
+                <InfoCircledIcon width="24" height="24"/>
+              </IconButton>
+            </Flex>
+          </DialogTrigger>
+          <DialogContent>
+            <Flex direction="column" gap="4">
+              <Heading size="7">How to use the simulator</Heading>
+              <Text className="pt-2">
+                This tool predicts what your race time will be on a bike course, taking into
+                account the elevation profile and key parameters like your average power, CdA, and rolling resistance.
+              </Text>
+              <Text weight="medium" color="indigo">
+                You can use the tool to (1) estimate what a realistic bike split might be, and (2)
+                play with parameters to improve performance.
+              </Text>
+              <Text>
+                Internally, the simulator reads in a <Code>.gpx</Code> or <Code>.fit</Code> file, and then
+                simulates what would happen if you cycle at a constant race power. To see a derivation for
+                the physics equations, I'd recommend this <RadixLink href="https://www.gribble.org/cycling/power_v_speed.html">tool</RadixLink> by Steve Gribble.
+              </Text>
+            </Flex>
+          </DialogContent>
+        </DialogRoot>
+        
+        {/* <TabGroup index={unitsTab} className="ml-auto w-fit" color="blue" onIndexChange={setUnitsTab}>
+          <TabList className="mt-8" variant="solid">
+            <Tab icon={IconRuler}>metric</Tab>
+            <Tab icon={IconRuler2}>imperial</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel/>
+            <TabPanel/>
+          </TabPanels>
+        </TabGroup> */}
+
+        <Flex align="center" gap="3" className="ml-auto">
+        <RulerIcon/>
+        <Select
+          value={units}
+          onValueChange={v => setUnits(v as "imperial" | "metric")}
+          className="w-fit"
+          enableClear={false}
+        >
+          <SelectItem value="metric" icon={IconCircle}>
+            metric
+          </SelectItem>
+          <SelectItem value="imperial" icon={IconCircle}>
+            imperial
+          </SelectItem>
+        </Select>
+        </Flex>
+      </Flex>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <Grid columns={{initial: "1", sm: "3", lg: "4"}} gap="5">
@@ -213,7 +250,7 @@ export default function Toolbar() {
 
             <Flex direction="column" gap="2">
               <Heading size="3">
-                Mass of rider (<Code>kg</Code>)
+                Mass of rider (<Code>{units === "metric" ? "kg" : "lbs"}</Code>)
               </Heading>
               <FormField
                 control={form.control}
@@ -222,7 +259,8 @@ export default function Toolbar() {
                   <FormItem>
                     <FormControl>
                       <NumberInput
-                        {...field}
+                        value={units === "metric" ? field.value : field.value * 2.20462}
+                        onValueChange={(v) => form.setValue("mass_rider_kg", units === "metric" ? v : v / 2.20462)}
                         placeholder="Your dressed weight"
                         step={0.5}
                         required
@@ -236,7 +274,7 @@ export default function Toolbar() {
 
             <Flex direction="column" gap="2">
               <Heading size="3">
-                Mass of bike (<Code>kg</Code>)
+                Mass of bike (<Code>{units === "metric" ? "kg" : "lbs"}</Code>)
               </Heading>
               <FormField
                 control={form.control}
@@ -245,7 +283,8 @@ export default function Toolbar() {
                   <FormItem>
                     <FormControl>
                       <NumberInput
-                        {...field}
+                        value={units === "metric" ? field.value : field.value * 2.20462}
+                        onValueChange={(v) => form.setValue("mass_bike_kg", units === "metric" ? v : v / 2.20462)}
                         placeholder="Loaded bike weight"
                         step={0.5}
                         required
