@@ -1,15 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { Card, Code, Flex, Grid, Heading, Separator, Text } from "@radix-ui/themes";
-import { Link as RadixLink } from "@radix-ui/themes";
+import { CalloutRoot, CalloutText, Card, Code, Flex, Grid, Heading, Separator, Text } from "@radix-ui/themes";
 
-import { AreaChart, LineChart, Select, SelectItem, Title } from "@tremor/react";
+import { AreaChart, LineChart, Title } from "@tremor/react";
 
-import demoData from "./example.json";
-
-import useSWR, { useSWRConfig } from "swr"
+import useSWR from "swr"
 import { useState } from "react";
 import Toolbar from "./toolbar";
 import { Results } from "./types";
@@ -45,6 +41,14 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
 
   if (!data) {
     return <></>;
+  }
+
+  // @ts-ignore
+  if (data.detail) {
+    return (<CalloutRoot color="red">
+      {/* @ts-ignore */}
+      <CalloutText>Error: {data.detail}</CalloutText>
+    </CalloutRoot>)
   }
 
   const elapsed = data.states.at(-1)?.t || 0;
@@ -86,7 +90,7 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
         </Text>
       </Flex>
 
-      <Grid gap="6" columns={{initial: "3", sm: "3", md: "6"}}>
+      <Grid gap="6" columns={{initial: "1", sm: "3", md: "5"}}>
         <MetricCard title="Predicted finish" value={predFinish} units="elapsed"/>
         <MetricCard title="Average speed" value={avgSpeed.toLocaleString("default", { maximumFractionDigits: 1 })} units={units === "metric" ? "km/hr" : "mph"}/>
         <MetricCard title="Total elevation gain" value={totalGain.toLocaleString("default", { maximumFractionDigits: 0 })} units={units === "metric" ? "m" : "ft"}/>
