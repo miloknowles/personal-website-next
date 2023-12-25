@@ -95171,6 +95171,9 @@
           "F_roll": 1.67
       }
   ],
+  "course_distance_m": 90000,
+  "course_gain_m": 2000,
+  "avg_speed_m_per_s": 10.0,
   "meta": {
       "compute_sec": 0.2816128730773926,
       "compute_iters": 9517

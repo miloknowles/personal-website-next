@@ -24,6 +24,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/themes": "^2.0.0",
     "@tabler/icons-react": "^2.40.0",
+    "@tremor/react": "^3.12.1",
     "@types/highcharts": "^7.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",

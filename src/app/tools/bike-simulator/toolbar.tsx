@@ -4,11 +4,10 @@ import { Button } from "@/components/ui/button";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import {
   CalloutIcon, CalloutRoot, CalloutText, Code, DialogContent,
-  DialogRoot, DialogTrigger, Flex, Grid, Heading, Text
+  DialogRoot, DialogTrigger, Flex, Grid, Heading, IconButton, Text
 } from "@radix-ui/themes";
 import { Link as RadixLink } from "@radix-ui/themes"
 import ChooseCourse from "./ChooseCourse";
-import { Input } from "@/components/ui/input";
 
 import {
   HoverCard,
@@ -31,6 +30,8 @@ import * as z from "zod"
 import useSWR, { useSWRConfig } from "swr"
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { Badge, NumberInput } from "@tremor/react";
+import { presetsCRR, presetsCdA, presetsDtl } from "./presets";
 
 
 const formSchema = z.object({
@@ -76,6 +77,26 @@ const Label = (props: { title: string, units: string, description: any }) => {
 }
 
 
+const Indicator = (props: { value: number, choices: { value: number, label: string, color: string }[], setValue: (v: number) => void }) => {
+  const badges = props.choices.map((c, i) => (
+  
+    <Badge
+      size="sm"
+      color={(
+        (i === 0 && props.value >= c.value) || // First option
+        (i >= (props.choices.length - 1) && props.value <= c.value) || // Last option
+        (props.value <= c.value && props.value > props.choices[i + 1].value)
+      ) ? c.color : "gray"}
+      onClick={() => props.setValue(c.value)}
+    >
+      {c.label}
+    </Badge>
+  ));
+
+  return badges;
+}
+
+
 export default function Toolbar() {
   const baseUrl = process.env.NODE_ENV === "production" ? "https://todo.app" : "http://localhost:8000"
   const [loading, setLoading] = useState(false);
@@ -86,9 +107,9 @@ export default function Toolbar() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       average_power_watts: 250,
-      average_cda: 0.3,
-      crr: 0.002,
-      loss_drivetrain: 2,
+      average_cda: 0.27,
+      crr: 0.005,
+      loss_drivetrain: 3,
       mass_rider_kg: 75,
       mass_bike_kg: 10,
     },
@@ -119,13 +140,19 @@ export default function Toolbar() {
     setLoading(false);
   }
 
+  const _crr = form.watch("crr");
+  const _cda = form.watch("average_cda");
+  const _dtl = form.watch("loss_drivetrain");
+
   return (
     <Flex direction="column" gap="6" justify="center" align="start">
       <DialogRoot>
         <DialogTrigger>
-          <Flex gap="4">
-            <Heading size="8">Bike Split Simulator</Heading>
-            <Button variant="secondary">How it works</Button>
+          <Flex gap="4" align="center">
+            <Heading size="8">Bike Simulator</Heading>
+            <IconButton variant="ghost" radius="full">
+              <InfoCircledIcon width="24" height="24"/>
+            </IconButton>
           </Flex>
         </DialogTrigger>
         <DialogContent>
@@ -141,15 +168,15 @@ export default function Toolbar() {
             </Text>
             <Text>
               Internally, the simulator reads in a <Code>.gpx</Code> or <Code>.fit</Code> file, and then
-              simulates what would happen if you cycle at a constant race power. The physics equations
-              are from this excellent <RadixLink href="https://www.gribble.org/cycling/power_v_speed.html">tool</RadixLink> by Steve Gribble.
+              simulates what would happen if you cycle at a constant race power. To see a derivation for
+              the physics equations, I'd recommend this <RadixLink href="https://www.gribble.org/cycling/power_v_speed.html">tool</RadixLink> by Steve Gribble.
             </Text>
           </Flex>
         </DialogContent>
       </DialogRoot>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <Grid columns={{initial: "1", md: "3", lg: "4"}} gap="5">
+        <Grid columns={{initial: "1", sm: "3", lg: "4"}} gap="5">
           <Flex gap="4" direction="column">
             <Heading size="7">Inputs</Heading>
             <FormField
@@ -160,17 +187,6 @@ export default function Toolbar() {
               )}
             />
             <CourseCallout/>
-            <Button
-              className="w-full"
-              type="submit"
-              disabled={loading}
-            >
-              {
-                loading ?
-                  <Flex align="center"><Loader2 className="mr-2 h-4 w-4 animate-spin" /><Text>Simulating</Text></Flex> :
-                  "Run simulation"
-              }
-            </Button>
           </Flex>
 
           <Flex direction="column" gap="4" className="w-full">
@@ -182,11 +198,10 @@ export default function Toolbar() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input
+                      <NumberInput
                         {...field}
                         placeholder="Your race power"
-                        className="rounded-xl text-center"
-                        type="number"
+                        step={5}
                         required
                       />
                     </FormControl>
@@ -206,13 +221,12 @@ export default function Toolbar() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                    <Input
-                      {...field}
-                      type="number"
-                      className="rounded-xl text-center"
-                      placeholder="Your dressed weight"
-                      required
-                    />
+                      <NumberInput
+                        {...field}
+                        placeholder="Your dressed weight"
+                        step={0.5}
+                        required
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -230,11 +244,96 @@ export default function Toolbar() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                    <Input
+                      <NumberInput
+                        {...field}
+                        placeholder="Loaded bike weight"
+                        step={0.5}
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </Flex>
+          </Flex>
+
+          <Flex direction="column" gap="4">
+            <Flex direction="column" gap="2" className="w-full">
+              <Label
+                title="Crr"
+                units="unitless"
+                description={
+                  <Text>
+                    This coefficient measures how much resistance your wheel encounters as it rolls, and
+                    depends on the tube/tire you use and your tire pressure.
+                    You can find an very comprehensive database of rolling
+                    resistances <RadixLink href="https://www.bicyclerollingresistance.com/road-bike-reviews">here</RadixLink>.
+                  </Text>
+                }
+              />
+              <Flex gap="2">
+                <Indicator
+                  value={_crr}
+                  choices={[
+                    { label: "Bad", value: presetsCRR.bad, color: "orange" },
+                    { label: "Average", value: presetsCRR.average, color: "yellow" },
+                    { label: "Good", value: presetsCRR.good, color: "blue" },
+                    { label: "Great", value: presetsCRR.excellent, color: "green" }
+                  ]}
+                  setValue={(v) => form.setValue("crr", v)}
+                />
+              </Flex>
+              <FormField
+                control={form.control}
+                name="crr"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <NumberInput
+                        {...field}
+                        placeholder="Lower is better"
+                        step={0.0005}
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </Flex>
+
+            <Flex direction="column" gap="2" className="w-full">
+              <Label
+                title="Drivetrain loss"
+                units="%"
+                description="This is the percentage of power lost due to friction in your chain and drivetrain. It's typically in the 2-5% range and can be improved by things like waxing your chain, using ceramic bearings, and using optimal gearing."
+              />
+              <Flex gap="2">
+                <Indicator
+                  value={_dtl}
+                  choices={[
+                    { label: "Bad", value: presetsDtl.bad, color: "orange" },
+                    { label: "Average", value: presetsDtl.average, color: "yellow" },
+                    { label: "Good", value: presetsDtl.good, color: "blue" },
+                    { label: "Great", value: presetsDtl.excellent, color: "green" }
+                  ]}
+                  setValue={(v) => form.setValue("loss_drivetrain", v)}
+                />
+              </Flex>
+              <FormField
+                control={form.control}
+                name="loss_drivetrain"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                    <NumberInput
                       {...field}
-                      type="number"
-                      className="rounded-xl text-center"
-                      placeholder="Loaded bike weight"
+                      placeholder="Lower is better"
+                      step={0.1}
+                      min={0.1}
+                      max={20}
+                      required
                     />
                     </FormControl>
                     <FormMessage />
@@ -263,11 +362,16 @@ export default function Toolbar() {
               }
             />
             <Flex gap="2" wrap="wrap">
-              <Button size="sm" className="rounded-xl text-xs" variant="secondary">Upright</Button>
-              <Button size="sm" className="rounded-xl text-xs" variant="secondary">Drops</Button>
-              <Button size="sm" className="rounded-xl text-xs" variant="secondary">Aero (avg)</Button>
-              <Button size="sm" className="rounded-xl text-xs" variant="secondary">Aero (good)</Button>
-              <Button size="sm" className="rounded-xl text-xs" variant="secondary">Aero (pro)</Button>
+              <Indicator
+                value={_cda}
+                choices={[
+                  { label: "Upright", value: presetsCdA.upright, color: "orange" },
+                  { label: "Drops", value: presetsCdA.drops, color: "yellow" },
+                  { label: "Aero", value: presetsCdA.aero, color: "blue" },
+                  { label: "Pro", value: presetsCdA.pro, color: "green" }
+                ]}
+                setValue={(v) => form.setValue("average_cda", v)}
+              />
             </Flex>
             <FormField
               control={form.control}
@@ -275,11 +379,13 @@ export default function Toolbar() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                  <Input
+                  <NumberInput
                     {...field}
-                    type="number"
-                    className="rounded-xl text-center"
-                    placeholder="Typically around 0.2-0.4"
+                    placeholder="Lower is better"
+                    step={0.005}
+                    min={0.1}
+                    max={0.5}
+                    required
                   />
                   </FormControl>
                   <FormMessage />
@@ -287,77 +393,18 @@ export default function Toolbar() {
               )}
             />
           </Flex>
-
-          <Flex direction="column" gap="4">
-            <Flex direction="column" gap="2" className="w-full">
-              <Label
-                title="Coeff. of rolling resistance"
-                units="unitless"
-                description={
-                  <Text>
-                    This coefficient measures how much resistance your wheel encounters as it rolls, and
-                    depends on the tube/tire you use and your tire pressure.
-                    You can find an very comprehensive database of rolling
-                    resistances <RadixLink href="https://www.bicyclerollingresistance.com/road-bike-reviews">here</RadixLink>.
-                  </Text>
-                }
-              />
-              <Flex gap="2">
-                <Button size="sm" className="rounded-xl text-xs" variant="secondary">Bad</Button>
-                <Button size="sm" className="rounded-xl text-xs" variant="secondary">Average</Button>
-                <Button size="sm" className="rounded-xl text-xs" variant="secondary">Good</Button>
-                <Button size="sm" className="rounded-xl text-xs" variant="secondary">Excellent</Button>
-              </Flex>
-              <FormField
-                control={form.control}
-                name="crr"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                    <Input
-                      {...field}
-                      type="number"
-                      className="rounded-xl text-center w-full"
-                      placeholder="Typically around 0.002"
-                    />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </Flex>
-
-            <Flex direction="column" gap="2" className="w-full">
-              <Label
-                title="Drivetrain loss"
-                units="%"
-                description="This is the percentage of power lost due to friction in your chain and drivetrain. It's typically in the 1-2% range and can be improved by things like waxing your chain and using optimal gearing."
-              />
-              <Flex gap="2">
-                <Button size="sm" className="rounded-xl text-xs" variant="secondary">Bad</Button>
-                <Button size="sm" className="rounded-xl text-xs" variant="secondary">Average</Button>
-                <Button size="sm" className="rounded-xl text-xs" variant="secondary">Good</Button>
-              </Flex>
-              <FormField
-                control={form.control}
-                name="loss_drivetrain"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                    <Input
-                      {...field}
-                      type="number"
-                      className="rounded-xl text-center w-full"
-                      placeholder="Typically around 1-2%"
-                    />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </Flex>
-          </Flex>
         </Grid>
+        <Button
+          className=""
+          type="submit"
+          disabled={loading}
+        >
+          {
+            loading ?
+              <Flex align="center"><Loader2 className="mr-2 h-4 w-4 animate-spin" /><Text>Simulating</Text></Flex> :
+              "Run simulation"
+          }
+        </Button>
         </form>
       </Form>
     </Flex>

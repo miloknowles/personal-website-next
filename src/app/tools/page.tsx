@@ -43,7 +43,7 @@ export default function Page() {
           </Flex>
           <Grid columns={{initial: "1", md: "3"}} mt="6" gap="4">
             <Card
-              href="/tools/bike-split-simulator"
+              href="/tools/bike-simulator"
               abbrev="BSP"
               color="green"
               t="Bike split simulator"

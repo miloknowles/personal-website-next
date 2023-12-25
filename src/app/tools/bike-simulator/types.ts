@@ -13,6 +13,10 @@ export interface State {
 export interface Results {
   states: State[]
 
+  course_distance_m: number
+  course_gain_m: number
+  avg_speed_m_per_s: number
+
   meta: {
     compute_sec: number
     compute_iters: number
