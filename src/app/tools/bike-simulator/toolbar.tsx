@@ -106,7 +106,7 @@ interface IToolbarProps {
 
 export default function Toolbar({units, setUnits} : IToolbarProps) {
   const baseUrl = process.env.NODE_ENV === "production" ?
-    "https://training-tools-plum.vercel.app/simulate" :
+    "https://training-tools-plum.vercel.app" :
     "http://localhost:8000";
   const [loading, setLoading] = useState(false);
 

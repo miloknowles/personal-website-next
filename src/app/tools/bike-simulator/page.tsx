@@ -3,7 +3,7 @@ import Tool from "./client"
 
 export const metadata: Metadata = {
   title: 'Bike Simulator',
-  description: 'Predict a bike split using the elevation map, your target power, and other parameters like CdA and rolling resistance.',
+  description: 'Predict your finish time on a bike course using a physics simulator',
 }
 
 export default function Page() {

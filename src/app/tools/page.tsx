@@ -38,8 +38,7 @@ export default function Page() {
           <Flex direction="column" gap="4" className="max-w-lg">
             <Heading size="9">Triathlon Tools</Heading>
             <Text>These are some tools I've been developing to help myself train and
-              race triathlons. If you have suggestions, feedback, or bugs, feel free
-              to <RadixLink href="mailto:miloknowles97@gmail.com">let me know.</RadixLink></Text>
+              race. If you have suggestions, feedback, or bugs, please <RadixLink href="mailto:miloknowles97@gmail.com">let me know.</RadixLink></Text>
           </Flex>
           <Grid columns={{initial: "1", md: "3"}} mt="6" gap="4">
             <Card
@@ -47,7 +46,7 @@ export default function Page() {
               abbrev="BSP"
               color="green"
               t="Bike split simulator"
-              d="Predict a bike split using the elevation map, your target power, and other parameters like CdA and rolling resistance."
+              d="Predict your finish time on a bike course using a physics simulator"
             />
             <Card
               href="/tools/swimming-tss"
