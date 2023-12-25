@@ -82,7 +82,9 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
       <Flex direction="column" className="w-full">
         <Flex className="w-full">
           <Heading size="7">Results</Heading>
-          <Button className="ml-auto">Download raw data</Button>
+          {/* <Button className="ml-auto" onClick={() => {
+
+          }}>Download raw data</Button> */}
         </Flex>
         <Text size="1" className="text-muted-foreground">
           Simulated <Code>{data.meta.compute_iters || "N/A"}</Code> timesteps
