@@ -38,7 +38,7 @@ const PaceInput = (props: {
       <Slider
         defaultValue={[props.seconds]}
         min={50}
-        max={3*60}
+        max={2*60}
         step={1}
         className="w-full sm:w-[400px]"
         value={[props.seconds]}
@@ -84,7 +84,7 @@ const PaceInput = (props: {
 // }
 
 
-export default function SwimmingTSSTool() {
+export default function Tool() {
   const [movingMins, setMovingMins] = useState(45);
   const [ftpSec, setFtpSec] = useState(90);
   const [paceSec, setPaceSec] = useState(100);

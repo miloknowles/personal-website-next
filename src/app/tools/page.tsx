@@ -43,11 +43,11 @@ export default function Page() {
           </Flex>
           <Grid columns={{initial: "1", md: "3"}} mt="6" gap="4">
             <Card
-              href="/tools/bike-split-calculator"
+              href="/tools/bike-simulator"
               abbrev="BSP"
               color="green"
-              t="Bike split predictor"
-              d="Use the elevation map of a course and your race power to predict finish time."
+              t="Bike split simulator"
+              d="Predict a bike split using the elevation map, your target power, and other parameters like CdA and rolling resistance."
             />
             <Card
               href="/tools/swimming-tss"

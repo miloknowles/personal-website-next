@@ -10,7 +10,12 @@ import Socials from "@/components/Socials";
 const BigLink = (props: { href: string, target?: string, children: any, onClick?: () => void }) => {
   return (
     <Link href={props.href} onClick={props.onClick} target={props.target}>
-      <Heading size="9">{props.children}</Heading>
+      <Heading
+        size="9"
+        className="relative after:bg-current after:absolute after:h-[2px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-200 cursor-pointer w-min"
+      >
+        {props.children}
+      </Heading>
     </Link>
   );
 }
@@ -54,7 +59,7 @@ export default function Navigation() {
               <BigLink href="/work" onClick={onClickLink}>Work</BigLink>
               <BigLink href="/writing" onClick={onClickLink}>Writing</BigLink>
               <BigLink href="/tools" onClick={onClickLink}>Tools</BigLink>
-              <BigLink href="https://resume.io/r/NGZYn7sIv" onClick={onClickLink} target={"_blank"}>Resume</BigLink>
+              {/* <BigLink href="https://resume.io/r/NGZYn7sIv" onClick={onClickLink} target={"_blank"}>Resume</BigLink> */}
               <Flex>
                 <Socials size={64} color="white"/>
               </Flex>
