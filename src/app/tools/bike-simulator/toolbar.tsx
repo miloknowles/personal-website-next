@@ -54,9 +54,9 @@ const CourseCallout = () => (
       <InfoCircledIcon/>
     </CalloutIcon>
     <CalloutText>
-      Don't see your course? Send me
+      Don't see your course? This tool is a work in progress, so please send me
       an email with the <Code>GPX</Code> or <Code>FIT</Code> file and
-      I'm happy to add it to the tool.
+      I'm happy to add it.
     </CalloutText>
   </CalloutRoot>
 );
@@ -197,11 +197,11 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
         </TabGroup> */}
 
         <Flex align="center" gap="3" className="ml-auto">
-        <RulerIcon/>
+        {/* <RulerIcon/> */}
         <Select
           value={units}
           onValueChange={v => setUnits(v as "imperial" | "metric")}
-          className="w-fit"
+          className="w-[50px]"
           enableClear={false}
         >
           <SelectItem value="metric" icon={IconCircle}>
@@ -230,7 +230,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
 
           <Flex direction="column" gap="4" className="w-full">
             <Flex direction="column" gap="2">
-              <Label title="Race power" units="W" description="This is the average power you plan to race at."/>
+              <Label title="Race power" units="W" description="This is the average power you plan (or hope) to race at."/>
               <FormField
                 control={form.control}
                 name="average_power_watts"
@@ -305,12 +305,20 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                 title="Crr"
                 units="unitless"
                 description={
+                  <Flex direction="column" gap="2">
                   <Text>
-                    This coefficient measures how much resistance your wheel encounters as it rolls, and
-                    depends on the tube/tire you use and your tire pressure.
+                    The coefficient of rolling resistance quantifies the friction your wheel encounters as it rolls, and
+                    depends on the tube/tire you use, your tire pressure, and the surface you're riding on.
                     You can find an very comprehensive database of rolling
                     resistances <RadixLink href="https://www.bicyclerollingresistance.com/road-bike-reviews">here</RadixLink>.
                   </Text>
+                  <Text>
+                    Note that the website above reports wattage values at a given velocity and weight. To convert to
+                    unitless <Code>Crr</Code>, use the formula: <Code>Crr = P / (W * v * g)</Code> where
+                    <Code>P</Code> is the reported rolling loss in watts, <Code>v</Code> is the velocity of the
+                    test and <Code>g = 8.91</Code>.
+                  </Text>
+                  </Flex>
                 }
               />
               <Flex gap="2">
@@ -348,7 +356,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               <Label
                 title="Drivetrain loss"
                 units="%"
-                description="This is the percentage of power lost due to friction in your chain and drivetrain. It's typically in the 2-5% range and can be improved by things like waxing your chain, using ceramic bearings, and using optimal gearing."
+                description="This is the percentage of pedaling power that is lost due to friction in your chain and drivetrain. It's typically in the 2-5% range and can be reduced by things like cleaning and waxing your chain."
               />
               <Flex gap="2">
                 <Indicator
@@ -391,13 +399,14 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               description={
                 <Flex gap="2" direction="column">
                   <Text>
-                    Your coefficient of drag, or CdA, is a measure of how streamlined you are, and is one of the most important parameters for race performance.
+                    Your coefficient of drag, or <Code>CdA</Code>, is a measure of how aerodynamic you are, and is one of the most important parameters for race performance.
                   </Text>
                   <Text>
-                    You can measure this with a wind tunnel or aerometer. A more accessible way to estimate it is called the Chung method.
+                    If you have a wind tunnel or track, you can measure this. Otherwise, the "Chung method" can be used for estimation, and there are several "aerometers" on the market now that combine measurement and estimation.
                   </Text>
                   <Text>
-                    If you don't know this number, just make an educated guess.
+                    If you don't know this number, you can do some googling about your bike setup
+                    and position to make an educated guess.
                   </Text>
                 </Flex>
               }

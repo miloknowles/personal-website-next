@@ -10,7 +10,7 @@ export const COURSES = [
     emoji: "🇺🇸",
   },
   {
-    value: "haleakala_climb",
+    value: "haleakala_kom",
     label: "Haleakala KOM",
     emoji: "🇺🇸",
   },

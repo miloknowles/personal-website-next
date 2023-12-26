@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { CalloutRoot, CalloutText, Card, Code, Flex, Grid, Heading, Separator, Text } from "@radix-ui/themes";
 
 import { AreaChart, LineChart, Title } from "@tremor/react";
@@ -10,17 +9,6 @@ import { useState } from "react";
 import Toolbar from "./toolbar";
 import { Results } from "./types";
 import MetricCard from "./MetricCard";
-
-
-const DataCard = (props: { title: string, value: string, units?: string }) => (
-  <Card className="p-3 bg-transparent rounded-xl">
-    <Flex direction="column" gap="0">
-      <Text weight="medium" size="2">{props.title}</Text>
-      <Heading size="7" color="indigo">{props.value}</Heading>
-      <Text weight="light" size="1">{props.units}</Text>
-    </Flex>
-  </Card>
-);
 
 
 const metersPerSecToMph = 2.23694;
@@ -40,14 +28,17 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
   // const data: Results = demoData;
 
   if (!data) {
+    console.error("No data from simulator, rendering nothing.")
     return <></>;
   }
 
   // @ts-ignore
-  if (data.detail) {
+  const detail = data.detail;
+  if (detail) {
+    console.error(detail);
     return (<CalloutRoot color="red">
       {/* @ts-ignore */}
-      <CalloutText>Error: {data.detail}</CalloutText>
+      <CalloutText>Something went wrong! 👀</CalloutText>
     </CalloutRoot>)
   }
 
