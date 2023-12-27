@@ -70,6 +70,13 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
   const avgRollLosses = chartData.map(v => v.P_roll).reduce((a, b) => a + b) / chartData.length;
   const avgGravLosses = chartData.map(v => v.P_grav).reduce((a, b) => a + b) / chartData.length;
 
+  const warningOverride = errors.includes("override_power") ?
+    <CalloutRoot mt="4" color="yellow">
+      <CalloutText>
+        <strong>Warning:</strong> Had to go above target power at <Code>{errors.filter(v => v === "override_power").length}</Code> timesteps to make it up a steep hill.
+      </CalloutText>
+    </CalloutRoot> : undefined;
+
   return (
     <Flex direction="column" align="start" className="w-full" gap="6">
       <Flex direction="column" className="w-full" align="start">
@@ -83,14 +90,7 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
           Simulated <Code>{data.meta.compute_iters || "N/A"}</Code> timesteps
           in <Code>{data.meta.compute_sec.toLocaleString("default", {maximumFractionDigits: 2}) || "N/A"} seconds</Code>
         </Text>
-        {
-          errors.length > 0 ?
-            <CalloutRoot mt="4" color="red">
-              <CalloutText>
-                Received error: {errors.map(e => <Code key={e} mr="2">{e}</Code>)}
-              </CalloutText>
-            </CalloutRoot> : undefined
-        }
+        {warningOverride}
       </Flex>
 
       <Grid gap="6" columns={{initial: "1", sm: "3", md: "5"}}>

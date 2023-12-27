@@ -10,6 +10,11 @@ export const COURSES = [
     emoji: "🇺🇸",
   },
   {
+    value: "texas_703",
+    label: "Texas 70.3",
+    emoji: "🇺🇸",
+  },
+  {
     value: "haleakala_kom",
     label: "Haleakala KOM",
     emoji: "🇺🇸",
@@ -23,5 +28,10 @@ export const COURSES = [
     value: "taupo_703",
     label: "Taupo 70.3",
     emoji: "🇳🇿",
+  },
+  {
+    value: "nice_703",
+    label: "Nice 70.3",
+    emoji: "🇫🇷",
   },
 ];
