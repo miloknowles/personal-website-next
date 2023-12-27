@@ -17,7 +17,7 @@ function LinkIcon(props: { href: string, children: any }) {
 
 export default function Socials(props: { size: number, color?: string }) {
   return (
-    <Flex gap="3">
+    <Flex gap="6">
       <LinkIcon href="https://www.linkedin.com/in/milo-knowles/">
         <LinkedInLogoIcon width={props.size.toString()} height={props.size.toString()} color={props.color || "gray"}/>
       </LinkIcon>
