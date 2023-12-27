@@ -197,7 +197,6 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
         </TabGroup> */}
 
         <Flex align="center" gap="3" className="ml-auto">
-        {/* <RulerIcon/> */}
         <Select
           value={units}
           onValueChange={v => setUnits(v as "imperial" | "metric")}
@@ -321,18 +320,6 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                   </Flex>
                 }
               />
-              <Flex gap="2">
-                <Indicator
-                  value={_crr}
-                  choices={[
-                    { label: "Bad", value: presetsCRR.bad, color: "orange" },
-                    { label: "Average", value: presetsCRR.average, color: "yellow" },
-                    { label: "Good", value: presetsCRR.good, color: "blue" },
-                    { label: "Great", value: presetsCRR.excellent, color: "green" }
-                  ]}
-                  setValue={(v) => form.setValue("crr", v)}
-                />
-              </Flex>
               <FormField
                 control={form.control}
                 name="crr"
@@ -350,6 +337,18 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                   </FormItem>
                 )}
               />
+              <Flex gap="2">
+                <Indicator
+                  value={_crr}
+                  choices={[
+                    { label: "Bad", value: presetsCRR.bad, color: "orange" },
+                    { label: "Average", value: presetsCRR.average, color: "yellow" },
+                    { label: "Good", value: presetsCRR.good, color: "blue" },
+                    { label: "Great", value: presetsCRR.excellent, color: "green" }
+                  ]}
+                  setValue={(v) => form.setValue("crr", v)}
+                />
+              </Flex>
             </Flex>
 
             <Flex direction="column" gap="2" className="w-full">
@@ -358,18 +357,6 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                 units="%"
                 description="This is the percentage of pedaling power that is lost due to friction in your chain and drivetrain. It's typically in the 2-5% range and can be reduced by things like cleaning and waxing your chain."
               />
-              <Flex gap="2">
-                <Indicator
-                  value={_dtl}
-                  choices={[
-                    { label: "Bad", value: presetsDtl.bad, color: "orange" },
-                    { label: "Average", value: presetsDtl.average, color: "yellow" },
-                    { label: "Good", value: presetsDtl.good, color: "blue" },
-                    { label: "Great", value: presetsDtl.excellent, color: "green" }
-                  ]}
-                  setValue={(v) => form.setValue("loss_drivetrain", v)}
-                />
-              </Flex>
               <FormField
                 control={form.control}
                 name="loss_drivetrain"
@@ -389,6 +376,18 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                   </FormItem>
                 )}
               />
+              <Flex gap="2">
+                <Indicator
+                  value={_dtl}
+                  choices={[
+                    { label: "Bad", value: presetsDtl.bad, color: "orange" },
+                    { label: "Average", value: presetsDtl.average, color: "yellow" },
+                    { label: "Good", value: presetsDtl.good, color: "blue" },
+                    { label: "Great", value: presetsDtl.excellent, color: "green" }
+                  ]}
+                  setValue={(v) => form.setValue("loss_drivetrain", v)}
+                />
+              </Flex>
             </Flex>
           </Flex>
 
@@ -411,18 +410,6 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                 </Flex>
               }
             />
-            <Flex gap="2" wrap="wrap">
-              <Indicator
-                value={_cda}
-                choices={[
-                  { label: "Upright", value: presetsCdA.upright, color: "orange" },
-                  { label: "Drops", value: presetsCdA.drops, color: "yellow" },
-                  { label: "Aero", value: presetsCdA.aero, color: "blue" },
-                  { label: "Pro", value: presetsCdA.pro, color: "green" }
-                ]}
-                setValue={(v) => form.setValue("average_cda", v)}
-              />
-            </Flex>
             <FormField
               control={form.control}
               name="average_cda"
@@ -442,6 +429,18 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                 </FormItem>
               )}
             />
+            <Flex gap="2" wrap="wrap">
+              <Indicator
+                value={_cda}
+                choices={[
+                  { label: "Upright", value: presetsCdA.upright, color: "orange" },
+                  { label: "Drops", value: presetsCdA.drops, color: "yellow" },
+                  { label: "Aero", value: presetsCdA.aero, color: "blue" },
+                  { label: "Pro", value: presetsCdA.pro, color: "green" }
+                ]}
+                setValue={(v) => form.setValue("average_cda", v)}
+              />
+            </Flex>
           </Flex>
         </Grid>
         <Button

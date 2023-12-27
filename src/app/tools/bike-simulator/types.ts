@@ -20,5 +20,7 @@ export interface Results {
   meta: {
     compute_sec: number
     compute_iters: number
+    simulation_sec: number
+    errors: string[]
   }
 }

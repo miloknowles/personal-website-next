@@ -14,4 +14,14 @@ export const COURSES = [
     label: "Haleakala KOM",
     emoji: "🇺🇸",
   },
+  {
+    value: "oceanside_703",
+    label: "Oceanside 70.3",
+    emoji: "🇺🇸",
+  },
+  {
+    value: "taupo_703",
+    label: "Taupo 70.3",
+    emoji: "🇳🇿",
+  },
 ];

@@ -42,6 +42,8 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
     </CalloutRoot>)
   }
 
+  const errors = data.meta.errors;
+
   const elapsed = data.states.at(-1)?.t || 0;
   const elapsedH = Math.floor(elapsed / 3600);
   const elapsedM = Math.floor((elapsed - elapsedH*3600) / 60);
@@ -70,7 +72,7 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
 
   return (
     <Flex direction="column" align="start" className="w-full" gap="6">
-      <Flex direction="column" className="w-full">
+      <Flex direction="column" className="w-full" align="start">
         <Flex className="w-full">
           <Heading size="7">Results</Heading>
           {/* <Button className="ml-auto" onClick={() => {
@@ -81,6 +83,14 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
           Simulated <Code>{data.meta.compute_iters || "N/A"}</Code> timesteps
           in <Code>{data.meta.compute_sec.toLocaleString("default", {maximumFractionDigits: 2}) || "N/A"} seconds</Code>
         </Text>
+        {
+          errors.length > 0 ?
+            <CalloutRoot mt="4" color="red">
+              <CalloutText>
+                Received error: {errors.map(e => <Code key={e} mr="2">{e}</Code>)}
+              </CalloutText>
+            </CalloutRoot> : undefined
+        }
       </Flex>
 
       <Grid gap="6" columns={{initial: "1", sm: "3", md: "5"}}>
