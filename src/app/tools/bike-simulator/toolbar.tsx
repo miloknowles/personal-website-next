@@ -29,10 +29,9 @@ import * as z from "zod"
 
 import useSWR, { useSWRConfig } from "swr"
 import { useState } from "react";
-import { Loader2, RulerIcon } from "lucide-react";
-import { Badge, NumberInput, Select, SelectItem, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@tremor/react";
+import { Loader2 } from "lucide-react";
+import { Badge, NumberInput, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@tremor/react";
 import { presetsCRR, presetsCdA, presetsDtl } from "./presets";
-import { IconCircle } from "@tabler/icons-react";
 
 
 const formSchema = z.object({

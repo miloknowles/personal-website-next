@@ -25,6 +25,11 @@ export const COURSES = [
     emoji: "🇺🇸",
   },
   {
+    value: "indian_wells_703",
+    label: "Indian Wells 70.3",
+    emoji: "🇺🇸",
+  },
+  {
     value: "taupo_703",
     label: "Taupo 70.3",
     emoji: "🇳🇿",
@@ -34,4 +39,9 @@ export const COURSES = [
     label: "Nice 70.3",
     emoji: "🇫🇷",
   },
+  {
+    value: "kona_im",
+    label: "Kona Ironman",
+    emoji: "🤙"
+  }
 ];
