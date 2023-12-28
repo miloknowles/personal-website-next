@@ -110,7 +110,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
     "http://localhost:8000";
   const [loading, setLoading] = useState(false);
 
-  const { mutate } = useSWRConfig()
+  const { mutate } = useSWRConfig();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -185,32 +185,20 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
           </DialogContent>
         </DialogRoot>
         
-        {/* <TabGroup index={unitsTab} className="ml-auto w-fit" color="blue" onIndexChange={setUnitsTab}>
+        <TabGroup
+          index={["metric", "imperial"].indexOf(units)}
+          onIndexChange={(index) => setUnits(["metric", "imperial"][index] as "metric" | "imperial")}
+          className="ml-auto w-fit"
+        >
           <TabList className="mt-8" variant="solid">
-            <Tab icon={IconRuler}>metric</Tab>
-            <Tab icon={IconRuler2}>imperial</Tab>
+            <Tab>metric</Tab>
+            <Tab>imperial</Tab>
           </TabList>
           <TabPanels>
             <TabPanel/>
             <TabPanel/>
           </TabPanels>
-        </TabGroup> */}
-
-        <Flex align="center" gap="3" className="ml-auto">
-        <Select
-          value={units}
-          onValueChange={v => setUnits(v as "imperial" | "metric")}
-          className="w-[50px]"
-          enableClear={false}
-        >
-          <SelectItem value="metric" icon={IconCircle}>
-            metric
-          </SelectItem>
-          <SelectItem value="imperial" icon={IconCircle}>
-            imperial
-          </SelectItem>
-        </Select>
-        </Flex>
+        </TabGroup>
       </Flex>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
