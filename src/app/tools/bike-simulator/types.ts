@@ -1,3 +1,32 @@
+export interface Data {
+  data: Point[]
+  meta: {
+    totalDistanceMeters: number
+    totalGainMeters: number
+  }
+}
+
+
+export interface Point {
+  x: number
+  y: number
+  a: number
+}
+
+
+export interface Params {
+  url: string
+  avgPowerWatts: number
+  avgCdA: number
+  avgCrr: number
+  lossDrivetrain: number
+  massBikeKg: number
+  massRiderKg: number
+  velocityMin: number
+  timestep: number
+}
+
+
 export interface State {
   t: number
   x: number
@@ -13,14 +42,12 @@ export interface State {
 export interface Results {
   states: State[]
 
-  course_distance_m: number
-  course_gain_m: number
-  avg_speed_m_per_s: number
+  errors?: string[]
 
   meta: {
-    compute_sec: number
-    compute_iters: number
-    simulation_sec: number
-    errors: string[]
+    computeSec: number
+    computeIters: number
+    totalDistanceMeters: number
+    totalGainMeters: number
   }
 }

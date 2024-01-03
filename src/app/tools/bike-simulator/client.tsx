@@ -22,13 +22,16 @@ interface IResultsDisplayProps {
 }
 
 
+const average = (array: any[]) => array.length === 0 ? 0 : array.reduce((a, b) => a + b) / array.length;
+
+
 const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
   // This will initially fetch nothing, but see data in the cache once it's fetched.
   const { data, error } = useSWR<Results>('/api/simulate');
   // const data: Results = demoData;
 
-  if (!data) {
-    console.error("No data from simulator, rendering nothing.")
+  if (!data || !data.states || data.states.length === 0) {
+    console.error("No data from simulator, rendering nothing.");
     return <></>;
   }
 
@@ -42,15 +45,17 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
     </CalloutRoot>)
   }
 
-  const errors = data.meta.errors;
+  const errors = data.errors;
 
   const elapsed = data.states.at(-1)?.t || 0;
   const elapsedH = Math.floor(elapsed / 3600);
   const elapsedM = Math.floor((elapsed - elapsedH*3600) / 60);
   const elapsedS = Math.floor(elapsed % 60);
 
-  const avgSpeed = data.avg_speed_m_per_s * (units === "metric" ? 3.6 : 2.23694);
-  const totalGain = data.course_gain_m * (units === "metric" ? 1 : 3.28084);
+  const avgSpeedMetersPerSec = average(data.states.map(v => v.v));
+
+  const avgSpeed = avgSpeedMetersPerSec * (units === "metric" ? 3.6 : 2.23694);
+  const totalGain = data.meta.totalGainMeters * (units === "metric" ? 1 : 3.28084);
   // const totalDist = data.course_distance_m / 1000 * 0.621371;
 
   const predFinish = `${elapsedH.toLocaleString("default", { minimumIntegerDigits: 2 })}:${elapsedM.toLocaleString("default", { minimumIntegerDigits: 2 })}:${elapsedS.toLocaleString("default", { minimumIntegerDigits: 2 })}`;
@@ -70,7 +75,7 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
   const avgRollLosses = chartData.map(v => v.P_roll).reduce((a, b) => a + b) / chartData.length;
   const avgGravLosses = chartData.map(v => v.P_grav).reduce((a, b) => a + b) / chartData.length;
 
-  const warningOverride = errors.includes("override_power") ?
+  const warningOverride = errors?.includes("override_power") ?
     <CalloutRoot mt="4" color="yellow">
       <CalloutText>
         <strong>Warning:</strong> Had to go above target power at <Code>{errors.filter(v => v === "override_power").length}</Code> timesteps to make it up a steep hill.
@@ -87,8 +92,8 @@ const ResultsDisplay = ({ units } : IResultsDisplayProps) => {
           }}>Download raw data</Button> */}
         </Flex>
         <Text size="1" className="text-muted-foreground">
-          Simulated <Code>{data.meta.compute_iters || "N/A"}</Code> timesteps
-          in <Code>{data.meta.compute_sec.toLocaleString("default", {maximumFractionDigits: 2}) || "N/A"} seconds</Code>
+          Simulated <Code>{data.meta.computeIters || "N/A"}</Code> timesteps
+          in <Code>{data.meta.computeSec.toLocaleString("default", {maximumFractionDigits: 2}) || "N/A"} seconds</Code>
         </Text>
         {warningOverride}
       </Flex>
