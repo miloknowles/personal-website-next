@@ -38,6 +38,7 @@ function getRho(y: number) {
 
 
 export async function simulate(params: Params) {
+  const t0 = performance.now();
   const response = await fetch(params.url);
   const data: Data = await response.json();
 
@@ -100,9 +101,12 @@ export async function simulate(params: Params) {
     ++iter;
   }
 
+  const t1 = performance.now();
+  const elapsed = (t1 - t0) / 1000;
+
   return {
     results,
     errors,
-    meta: { ...data.meta, computeSec: 0.1, computeIters: iter }
+    meta: { ...data.meta, computeSec: elapsed, computeIters: iter }
   };
 }
