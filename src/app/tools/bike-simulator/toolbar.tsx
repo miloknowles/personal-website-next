@@ -55,7 +55,7 @@ const CourseCallout = () => (
     </CalloutIcon>
     <CalloutText>
       Don't see your course? This tool is a work in progress, so please send me
-      an email with the <Code>GPX</Code> or <Code>FIT</Code> file and
+      an email with the <Code>GPX</Code> or <Code>FIT</Code> file (or link) and
       I'm happy to add it.
     </CalloutText>
   </CalloutRoot>
