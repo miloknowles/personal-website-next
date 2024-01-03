@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import {
-  CalloutIcon, CalloutRoot, CalloutText, Code, DialogContent,
+  CalloutIcon, CalloutRoot, CalloutText, Code, DialogClose, DialogContent,
   DialogRoot, DialogTrigger, Flex, Grid, Heading, IconButton, Text
 } from "@radix-ui/themes";
 import { Link as RadixLink } from "@radix-ui/themes"
@@ -164,7 +164,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
 
   return (
     <Flex direction="column" gap="6" justify="center" align="start" className="w-full">
-      <Flex direction="row" gap="4" className="w-full">
+      <Flex direction={{initial: "column", sm: "row"}} className="w-full" align="start">
         <DialogRoot>
           <DialogTrigger >
             <Flex gap="4" align="center">
@@ -175,11 +175,11 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
             </Flex>
           </DialogTrigger>
           <DialogContent>
-            <Flex direction="column" gap="4">
-              <Heading size="7">How to use the simulator</Heading>
+            <Flex direction="column" gap="4" align="start">
+              <Heading size="7">How it works</Heading>
               <Text className="pt-2">
                 This tool predicts what your race time will be on a bike course, taking into
-                account the elevation profile and key parameters like your average power, CdA, and rolling resistance.
+                account the elevation profile and key parameters like your average power, CdA, rolling resistance, air density, etc.
               </Text>
               <Text weight="medium" color="indigo">
                 You can use the tool to (1) estimate what a realistic bike split might be, and (2)
@@ -188,8 +188,11 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               <Text>
                 Internally, the simulator reads in a <Code>.gpx</Code> or <Code>.fit</Code> file, and then
                 simulates what would happen if you cycle at a constant race power. To see a derivation for
-                the physics equations, I'd recommend this <RadixLink href="https://www.gribble.org/cycling/power_v_speed.html">tool</RadixLink> by Steve Gribble.
+                the physics equations, I'd recommend this <RadixLink href="https://www.gribble.org/cycling/power_v_speed.html">page</RadixLink> by Steve Gribble.
               </Text>
+              <DialogClose>
+                <Button variant="secondary" className="ml-auto">Close</Button>
+              </DialogClose>
             </Flex>
           </DialogContent>
         </DialogRoot>
@@ -197,7 +200,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
         <TabGroup
           index={["metric", "imperial"].indexOf(units)}
           onIndexChange={(index) => setUnits(["metric", "imperial"][index] as "metric" | "imperial")}
-          className="ml-auto w-fit"
+          className="sm:ml-auto w-fit"
         >
           <TabList className="mt-8" variant="solid">
             <Tab>metric</Tab>
