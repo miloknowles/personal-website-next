@@ -8,7 +8,7 @@ import {
 } from "@radix-ui/themes";
 import { Link as RadixLink } from "@radix-ui/themes"
 import ChooseCourse from "./ChooseCourse";
-
+import { COURSES } from "./courses";
 import {
   HoverCard,
   HoverCardContent,
@@ -27,23 +27,24 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import useSWR, { useSWRConfig } from "swr"
+import { useSWRConfig } from "swr"
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Badge, NumberInput, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@tremor/react";
 import { presetsCRR, presetsCdA, presetsDtl } from "./presets";
+import { simulate } from "./simulator";
 
 
 const formSchema = z.object({
-  course_name: z.string({
+  courseName: z.string({
     required_error: "Please select a course.",
   }),
-  average_power_watts: z.coerce.number().min(50).max(1000),
-  average_cda: z.coerce.number().min(0.1).max(1),
-  crr: z.coerce.number().min(0.001).max(0.01),
-  loss_drivetrain: z.coerce.number().min(0.1).max(5),
-  mass_rider_kg: z.coerce.number().min(10).max(200),
-  mass_bike_kg: z.coerce.number().min(1).max(30)
+  avgPowerWatts: z.coerce.number().min(50).max(1000),
+  avgCdA: z.coerce.number().min(0.1).max(1),
+  avgCrr: z.coerce.number().min(0.001).max(0.01),
+  lossDrivetrain: z.coerce.number().min(0.1).max(5),
+  massRiderKg: z.coerce.number().min(10).max(200),
+  massBikeKg: z.coerce.number().min(1).max(30)
 });
 
 
@@ -54,7 +55,7 @@ const CourseCallout = () => (
     </CalloutIcon>
     <CalloutText>
       Don't see your course? This tool is a work in progress, so please send me
-      an email with the <Code>GPX</Code> or <Code>FIT</Code> file and
+      an email with the <Code>GPX</Code> or <Code>FIT</Code> file (or link) and
       I'm happy to add it.
     </CalloutText>
   </CalloutRoot>
@@ -114,31 +115,40 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      average_power_watts: 250,
-      average_cda: 0.27,
-      crr: 0.005,
-      loss_drivetrain: 3,
-      mass_rider_kg: 75,
-      mass_bike_kg: 10,
+      avgPowerWatts: 250,
+      avgCdA: 0.27,
+      avgCrr: 0.005,
+      lossDrivetrain: 3,
+      massRiderKg: 75,
+      massBikeKg: 10,
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
-    const response = await fetch(baseUrl + "/simulate", {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept-Encoding': 'gzip, deflate, br',
-      },
-      method: "POST",
-      body: JSON.stringify({timestep: 1, ...values}),
-      mode: 'cors',
+
+    const url = COURSES.find(v => (v.value === values.courseName))?.url;
+
+    if (!url) {
+      console.error(url);
+      return;
+    }
+
+    const { results, errors, meta } = await simulate({
+      url: url,
+      timestep: 0.1,
+      velocityMin: 1,
+      ...values,
     });
-    const content = await response.json();
+
+    const maxStepsForPlotting = 5000;
+
+    const takeEveryNth = Math.max(1, Math.ceil(results.length / maxStepsForPlotting));
+    console.debug(`Thinning results to take every ${takeEveryNth}th value.`);
 
     // Mutate the cache to include the latest results. This makes it globally
     // accessible to other components tht fetch the same key.
-    mutate('/api/simulate', content, {
+    mutate('/api/simulate', { states: results.filter((v, i) => ((i % takeEveryNth) === 0)), errors, meta }, {
       populateCache: (resultData, currentData) => {
         return resultData;
       },
@@ -148,9 +158,9 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
     setLoading(false);
   }
 
-  const _crr = form.watch("crr");
-  const _cda = form.watch("average_cda");
-  const _dtl = form.watch("loss_drivetrain");
+  const _avgCrr = form.watch("avgCrr");
+  const _cda = form.watch("avgCdA");
+  const _dtl = form.watch("lossDrivetrain");
 
   return (
     <Flex direction="column" gap="6" justify="center" align="start" className="w-full">
@@ -206,9 +216,9 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
             <Heading size="7">Inputs</Heading>
             <FormField
               control={form.control}
-              name="course_name"
+              name="courseName"
               render={({ field }) => (
-                <ChooseCourse value={field.value} setValue={(v) => form.setValue("course_name", v)}/>
+                <ChooseCourse value={field.value} setValue={(v) => form.setValue("courseName", v)}/>
               )}
             />
             <CourseCallout/>
@@ -219,7 +229,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               <Label title="Race power" units="W" description="This is the average power you plan (or hope) to race at."/>
               <FormField
                 control={form.control}
-                name="average_power_watts"
+                name="avgPowerWatts"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
@@ -242,13 +252,13 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               </Heading>
               <FormField
                 control={form.control}
-                name="mass_rider_kg"
+                name="massRiderKg"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
                       <NumberInput
                         value={units === "metric" ? field.value : field.value * 2.20462}
-                        onValueChange={(v) => form.setValue("mass_rider_kg", units === "metric" ? v : v / 2.20462)}
+                        onValueChange={(v) => form.setValue("massRiderKg", units === "metric" ? v : v / 2.20462)}
                         placeholder="Your dressed weight"
                         step={0.5}
                         required
@@ -266,13 +276,13 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               </Heading>
               <FormField
                 control={form.control}
-                name="mass_bike_kg"
+                name="massBikeKg"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
                       <NumberInput
                         value={units === "metric" ? field.value : field.value * 2.20462}
-                        onValueChange={(v) => form.setValue("mass_bike_kg", units === "metric" ? v : v / 2.20462)}
+                        onValueChange={(v) => form.setValue("massBikeKg", units === "metric" ? v : v / 2.20462)}
                         placeholder="Loaded bike weight"
                         step={0.5}
                         required
@@ -309,7 +319,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               />
               <FormField
                 control={form.control}
-                name="crr"
+                name="avgCrr"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
@@ -326,14 +336,14 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               />
               <Flex gap="2">
                 <Indicator
-                  value={_crr}
+                  value={_avgCrr}
                   choices={[
                     { label: "Bad", value: presetsCRR.bad, color: "orange" },
                     { label: "Average", value: presetsCRR.average, color: "yellow" },
                     { label: "Good", value: presetsCRR.good, color: "blue" },
                     { label: "Great", value: presetsCRR.excellent, color: "green" }
                   ]}
-                  setValue={(v) => form.setValue("crr", v)}
+                  setValue={(v) => form.setValue("avgCrr", v)}
                 />
               </Flex>
             </Flex>
@@ -346,7 +356,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               />
               <FormField
                 control={form.control}
-                name="loss_drivetrain"
+                name="lossDrivetrain"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
@@ -372,7 +382,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                     { label: "Good", value: presetsDtl.good, color: "blue" },
                     { label: "Great", value: presetsDtl.excellent, color: "green" }
                   ]}
-                  setValue={(v) => form.setValue("loss_drivetrain", v)}
+                  setValue={(v) => form.setValue("lossDrivetrain", v)}
                 />
               </Flex>
             </Flex>
@@ -399,7 +409,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
             />
             <FormField
               control={form.control}
-              name="average_cda"
+              name="avgCdA"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -425,7 +435,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                   { label: "Aero", value: presetsCdA.aero, color: "blue" },
                   { label: "Pro", value: presetsCdA.pro, color: "green" }
                 ]}
-                setValue={(v) => form.setValue("average_cda", v)}
+                setValue={(v) => form.setValue("avgCdA", v)}
               />
             </Flex>
           </Flex>
