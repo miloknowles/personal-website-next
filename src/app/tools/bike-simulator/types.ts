@@ -22,6 +22,8 @@ export interface Params {
   lossDrivetrain: number
   massBikeKg: number
   massRiderKg: number
+  ambientTempCelsius: number
+
   velocityMin: number
   timestep: number
 }

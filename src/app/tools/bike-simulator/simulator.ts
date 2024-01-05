@@ -1,7 +1,14 @@
 import { State, Params, Point, Data } from "./types";
 
 
-const G = 9.81 // m/s2
+const G = 9.80665 // m/s2
+const M = 0.0289644 // kg/mol, molar mass of Earth's air
+const R = 8.3144598 // N·m/(mol·K), universal gas constant
+const Rv = 461.495 // J/(kg K, specific gas constant of water vapor
+const Rd = 287.05 // J/(kg K, specific gas constant of dry air
+const Pb = 101325; // Pa
+const rhoSeaLevel = 1.225 // kg/m3
+const zeroDegCelsiusInKelvin = 273.15;
 
 
 function getCurrentIndex(data: Point[], i: number, x: number): number[] {
@@ -32,8 +39,18 @@ function interpolate(data: Point[], i0: number, i1: number, x: number, property:
 }
 
 
-function getRho(y: number) {
-  return 1.225;
+function getRho(y: number, Tb_kelvin: number, RH: number) {
+  // Calculate the pressure of dry air at the given temperature and altitude.
+  // See Density Equation 2: https://en.wikipedia.org/wiki/Barometric_formula
+  const pressureAtY = Pb * Math.exp((-G * M * y)/(R*Tb_kelvin));
+
+  // Calculate density, correcting for humidity.
+  // https://www.mathscinotes.com/2016/01/a-mathcad-utility-function-for-air-pressure-and-density/
+  const T = Tb_kelvin;
+  const Es = 6.1078 * Math.pow(10, 7.5 * T / (T + 237.3));
+  const Pv = RH * Es;
+  const rho = pressureAtY/(Rd*T) * (1 - (0.378 * Pv) / pressureAtY);
+  return rho;
 }
 
 
@@ -63,7 +80,7 @@ export async function simulate(params: Params) {
     const I = getCurrentIndex(data.data, i, x_t);
     const alt = interpolate(data.data, I[0], I[1], x_t, "y");
     const theta = interpolate(data.data, I[0], I[1], x_t, "a");
-    const rho = getRho(alt);
+    const rho = getRho(alt, params.ambientTempCelsius + zeroDegCelsiusInKelvin, 0);
     const v_hw = 0;
 
     const F_drag = 0.5 * rho * CdA * (v_t + v_hw)**2;

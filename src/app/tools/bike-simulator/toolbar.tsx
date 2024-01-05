@@ -44,7 +44,8 @@ const formSchema = z.object({
   avgCrr: z.coerce.number().min(0.001).max(0.01),
   lossDrivetrain: z.coerce.number().min(0.1).max(5),
   massRiderKg: z.coerce.number().min(10).max(200),
-  massBikeKg: z.coerce.number().min(1).max(30)
+  massBikeKg: z.coerce.number().min(1).max(30),
+  ambientTempCelsius: z.coerce.number().min(-18).max(45),
 });
 
 
@@ -121,6 +122,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
       lossDrivetrain: 3,
       massRiderKg: 75,
       massBikeKg: 10,
+      ambientTempCelsius: 20,
     },
   });
 
@@ -133,6 +135,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
       console.error(url);
       return;
     }
+    console.log(values.ambientTempCelsius)
 
     const { results, errors, meta } = await simulate({
       url: url,
@@ -391,54 +394,93 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
             </Flex>
           </Flex>
 
-          <Flex direction="column" gap="2" className="w-full">
-            <Label
-              title="CdA"
-              units="m2"
-              description={
-                <Flex gap="2" direction="column">
-                  <Text>
-                    Your coefficient of drag, or <Code>CdA</Code>, is a measure of how aerodynamic you are, and is one of the most important parameters for race performance.
-                  </Text>
-                  <Text>
-                    If you have a wind tunnel or track, you can measure this. Otherwise, the "Chung method" can be used for estimation, and there are several "aerometers" on the market now that combine measurement and estimation.
-                  </Text>
-                  <Text>
-                    If you don't know this number, you can do some googling about your bike setup
-                    and position to make an educated guess.
-                  </Text>
-                </Flex>
-              }
-            />
-            <FormField
-              control={form.control}
-              name="avgCdA"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                  <NumberInput
-                    {...field}
-                    placeholder="Lower is better"
-                    step={0.005}
-                    min={0.1}
-                    max={0.5}
-                    required
-                  />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Flex gap="2" wrap="wrap">
-              <Indicator
-                value={_cda}
-                choices={[
-                  { label: "Upright", value: presetsCdA.upright, color: "orange" },
-                  { label: "Drops", value: presetsCdA.drops, color: "yellow" },
-                  { label: "Aero", value: presetsCdA.aero, color: "blue" },
-                  { label: "Pro", value: presetsCdA.pro, color: "green" }
-                ]}
-                setValue={(v) => form.setValue("avgCdA", v)}
+          <Flex direction="column" gap="4">
+            <Flex direction="column" gap="2" className="w-full">
+              <Label
+                title="CdA"
+                units="m2"
+                description={
+                  <Flex gap="2" direction="column">
+                    <Text>
+                      Your coefficient of drag, or <Code>CdA</Code>, is a measure of how aerodynamic you are, and is one of the most important parameters for race performance.
+                    </Text>
+                    <Text>
+                      If you have a wind tunnel or track, you can measure this. Otherwise, the "Chung method" can be used for estimation, and there are several "aerometers" on the market now that combine measurement and estimation.
+                    </Text>
+                    <Text>
+                      If you don't know this number, you can do some googling about your bike setup
+                      and position to make an educated guess.
+                    </Text>
+                  </Flex>
+                }
+              />
+              <FormField
+                control={form.control}
+                name="avgCdA"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                    <NumberInput
+                      {...field}
+                      placeholder="Lower is better"
+                      step={0.005}
+                      min={0.1}
+                      max={0.5}
+                      required
+                    />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Flex gap="2" wrap="wrap">
+                <Indicator
+                  value={_cda}
+                  choices={[
+                    { label: "Upright", value: presetsCdA.upright, color: "orange" },
+                    { label: "Drops", value: presetsCdA.drops, color: "yellow" },
+                    { label: "Aero", value: presetsCdA.aero, color: "blue" },
+                    { label: "Pro", value: presetsCdA.pro, color: "green" }
+                  ]}
+                  setValue={(v) => form.setValue("avgCdA", v)}
+                />
+              </Flex>
+            </Flex>
+
+            <Flex direction="column" gap="2" className="w-full">
+              <Label
+                title="Temperature"
+                units="C"
+                description={
+                  <Flex gap="2" direction="column">
+                    <Text>
+                      Believe it or not, temperature actually makes a big difference in aerodynamic drag.
+                      Higher temperatures reduce air density, allowing you go faster. Check out the hour
+                      record series of the "Marginal Gains" podcast, where they talk about the ideal
+                      aerodynamic environment for cycling: a hot, humid day at altitude.
+                    </Text>
+                  </Flex>
+                }
+              />
+              <FormField
+                control={form.control}
+                name="ambientTempCelsius"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                    <NumberInput
+                      placeholder="Ambient temperature"
+                      value={units === "metric" ? field.value : field.value * (9/5) + 32}
+                      onValueChange={(v) => form.setValue("ambientTempCelsius", units === "metric" ? v : (v - 32) / 1.8)}
+                      step={1}
+                      min={units === "metric" ? -8 : 0}
+                      max={units === "metric" ? 45 : 115}
+                      required
+                    />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
             </Flex>
           </Flex>
