@@ -450,7 +450,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
             <Flex direction="column" gap="2" className="w-full">
               <Label
                 title="Temperature"
-                units="C"
+                units={units === "metric" ? "C" : "F"}
                 description={
                   <Flex gap="2" direction="column">
                     <Text>
