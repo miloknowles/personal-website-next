@@ -1,3 +1,5 @@
+import { UseFormReturn } from "react-hook-form"
+
 export interface Data {
   data: Point[]
   meta: {
@@ -53,3 +55,14 @@ export interface Results {
     totalGainMeters: number
   }
 }
+
+export type ToolbarFormType = UseFormReturn<{
+  avgCrr: number;
+  courseName: string;
+  avgPowerWatts: number;
+  avgCdA: number;
+  lossDrivetrain: number;
+  massRiderKg: number;
+  massBikeKg: number;
+  ambientTempCelsius: number;
+}, any, undefined>

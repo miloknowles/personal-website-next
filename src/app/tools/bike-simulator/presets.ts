@@ -1,27 +1,36 @@
 // These are derived from power loss at 18mph and a rider weight of 42.5kg.
 // See: https://www.bicyclerollingresistance.com/road-bike-reviews
 export const presetsCRR = {
-  // This is a Continental Gatorskin (20.2 W)
-  bad: 0.006,
-  // Slightly better than a Gatorskin.
-  average: 0.005,
-  // Middle of the pack on the website.
+  // Poor road quality with puncture resistance tires
+  bad: 0.00495,
+  // New pavement with no modifier
+  average: 0.00375,
+  // New pavement with race tire
   good: 0.0035,
-  // This is ~8W at 18mph and a rider weight of 42.5kg.
-  excellent: 0.0024,
+  // New pavement with race tire and latex tube
+  excellent: 0.0033,
 }
 
-// https://efficientcyclist.com/drivetrain-efficiency/
+// From the Silca tool:
+// <option value=".029">Track - 56/16</option>
+// <option value=".0325">Track - 49/14</option>
+// <option value=".047">New/Clean - 53/13</option>
+// <option value=".055">New/Clean - 48/12</option>
+// <option value=".01">Dirty Drive Train</option>
+// <option value=".005">Dry Lube</option>
+// <option value="-.0025">Silca Super Secret Chain Lube</option>
+// <option value="-.01">Hot Melt Wax Lube</option>
 export const presetsDtl = {
-  bad: 4, // Bad is greater than this
-  average: 3, // Average is less than this
-  good: 2, // Good is less than this
-  excellent: 1.5, // Excellent is less than this
+  bad: 6.5, // 48/12 gearing and dirty
+  average: 4.75, // 53/13 gearing with Dry Lube
+  good: 3.7, // 53/13 gearing with Hot Melt Wax
+  excellent: 1.9, // Track 56/16 gearing with Hot Melt Wax
 }
 
 export const presetsCdA = {
-  upright: 0.3,
-  drops: 0.27,
-  aero: 0.25,
-  pro: 0.22,
+  upright: 0.32,
+  drops: 0.304,
+  aero: 0.288,
+  optimized: 0.23,
+  pro: 0.20,
 }

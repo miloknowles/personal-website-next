@@ -33,6 +33,7 @@ import { Loader2 } from "lucide-react";
 import { Badge, NumberInput, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@tremor/react";
 import { presetsCRR, presetsCdA, presetsDtl } from "./presets";
 import { simulate } from "./simulator";
+import RollingInput from "./RollingInput";
 
 
 const formSchema = z.object({
@@ -302,57 +303,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
           </Flex>
 
           <Flex direction="column" gap="4">
-            <Flex direction="column" gap="2" className="w-full">
-              <Label
-                title="Crr"
-                units="unitless"
-                description={
-                  <Flex direction="column" gap="2">
-                  <Text>
-                    The coefficient of rolling resistance quantifies the friction your wheel encounters as it rolls, and
-                    depends on the tube/tire you use, your tire pressure, and the surface you're riding on.
-                    You can find an very comprehensive database of rolling
-                    resistances <RadixLink href="https://www.bicyclerollingresistance.com/road-bike-reviews">here</RadixLink>.
-                  </Text>
-                  <Text>
-                    Note that the website above reports wattage values at a given velocity and weight. To convert to
-                    unitless <Code>Crr</Code>, use the formula: <Code>Crr = P / (W * v * g)</Code> where
-                    <Code>P</Code> is the reported rolling loss in watts, <Code>v</Code> is the velocity of the
-                    test and <Code>g = 8.91</Code>.
-                  </Text>
-                  </Flex>
-                }
-              />
-              <FormField
-                control={form.control}
-                name="avgCrr"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <NumberInput
-                        {...field}
-                        placeholder="Lower is better"
-                        step={0.0005}
-                        required
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Flex gap="2">
-                <Indicator
-                  value={_avgCrr}
-                  choices={[
-                    { label: "Bad", value: presetsCRR.bad, color: "orange" },
-                    { label: "Average", value: presetsCRR.average, color: "yellow" },
-                    { label: "Good", value: presetsCRR.good, color: "blue" },
-                    { label: "Great", value: presetsCRR.excellent, color: "green" }
-                  ]}
-                  setValue={(v) => form.setValue("avgCrr", v)}
-                />
-              </Flex>
-            </Flex>
+            <RollingInput form={form} avgCrr={_avgCrr}/>
 
             <Flex direction="column" gap="2" className="w-full">
               <Label
@@ -437,9 +388,10 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                 <Indicator
                   value={_cda}
                   choices={[
-                    { label: "Upright", value: presetsCdA.upright, color: "orange" },
+                    { label: "Hoods", value: presetsCdA.upright, color: "orange" },
                     { label: "Drops", value: presetsCdA.drops, color: "yellow" },
                     { label: "Aero", value: presetsCdA.aero, color: "blue" },
+                    { label: "Optimized", value: presetsCdA.optimized, color: "teal" },
                     { label: "Pro", value: presetsCdA.pro, color: "green" }
                   ]}
                   setValue={(v) => form.setValue("avgCdA", v)}
