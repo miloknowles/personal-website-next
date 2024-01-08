@@ -41,6 +41,30 @@ export const COURSES = [
     emoji: "🇳🇿",
     url: "/courses/IM_Taupo_70.3.json",
   },
+  {
+    value: "chattanooga_703",
+    label: "Chattanooga 70.3",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Chattanooga_70.3.json",
+  },
+  {
+    value: "florida_703",
+    label: "Florida 70.3",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Florida_70.3.json",
+  },
+  {
+    value: "hawaii_703",
+    label: "Hawaii 70.3",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Hawaii_70.3.json",
+  },
+  {
+    value: "morro_bay_703",
+    label: "Morro Bay 70.3",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Morro_Bay_70.3.json",
+  },
   // {
   //   value: "nice_703",
   //   label: "Nice 70.3",
