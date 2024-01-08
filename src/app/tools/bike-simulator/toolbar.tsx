@@ -43,7 +43,7 @@ const formSchema = z.object({
   avgPowerWatts: z.coerce.number().min(50).max(1000),
   avgCdA: z.coerce.number().min(0.1).max(1),
   avgCrr: z.coerce.number().min(0.001).max(0.01),
-  lossDrivetrain: z.coerce.number().min(0.1).max(5),
+  lossDrivetrain: z.coerce.number().min(0.1).max(15).step(0.05),
   massRiderKg: z.coerce.number().min(10).max(200),
   massBikeKg: z.coerce.number().min(1).max(30),
   ambientTempCelsius: z.coerce.number().min(-18).max(45),
@@ -118,9 +118,9 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       avgPowerWatts: 250,
-      avgCdA: 0.27,
-      avgCrr: 0.005,
-      lossDrivetrain: 3,
+      avgCdA: presetsCdA.aero,
+      avgCrr: presetsCRR.average,
+      lossDrivetrain: presetsDtl.average,
       massRiderKg: 75,
       massBikeKg: 10,
       ambientTempCelsius: 20,
@@ -136,8 +136,6 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
       console.error(url);
       return;
     }
-    console.log(values.ambientTempCelsius)
-
     const { results, errors, meta } = await simulate({
       url: url,
       timestep: 0.1,
@@ -321,6 +319,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                       {...field}
                       placeholder="Lower is better"
                       step={0.1}
+                      formNoValidate
                       min={0.1}
                       max={20}
                       required

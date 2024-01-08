@@ -22,15 +22,15 @@ export const presetsCRR = {
 // <option value="-.01">Hot Melt Wax Lube</option>
 export const presetsDtl = {
   bad: 6.5, // 48/12 gearing and dirty
-  average: 4.75, // 53/13 gearing with Dry Lube
+  average: 4.7, // 53/13 gearing with Dry Lube
   good: 3.7, // 53/13 gearing with Hot Melt Wax
   excellent: 1.9, // Track 56/16 gearing with Hot Melt Wax
 }
 
 export const presetsCdA = {
   upright: 0.32,
-  drops: 0.304,
-  aero: 0.288,
+  drops: 0.30,
+  aero: 0.28,
   optimized: 0.23,
   pro: 0.20,
 }

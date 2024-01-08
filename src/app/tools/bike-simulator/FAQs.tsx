@@ -15,7 +15,7 @@ export default function FAQs() {
   return (
     <Flex direction="column" gap="6">
     <Heading size="7">FAQs</Heading>
-    <Grid columns={{initial: "1", sm: "2"}} gap="6">
+    <Grid columns={{initial: "1", md: "2"}} gap="6">
       <Accordion type="single" collapsible>
         <AccordionItem value="model-presets">
           <AccordionTrigger>How do I estimate my coefficient of rolling resistance?</AccordionTrigger>
@@ -293,7 +293,7 @@ export default function FAQs() {
                 Look up your height and weight in the table, and then multiply by your position
                 multiplier to get CdA. I think that most triathletes can do much
                 better (lower) than than Silca's aero position multiplier of <Code>0.9</Code>. Lots of
-                people on Slowtwitch claim to be in the low <Code>0.20 m2</Code> range, for example. Take this with
+                people on Slowtwitch claim to be in the low <Code>~0.2 m2</Code> range, for example. Take this with
                 a grain of salt, but you can probably get into the low 0.20s with an optimal position
                 and the best gear.
               </Text>
@@ -332,9 +332,9 @@ export default function FAQs() {
           <AccordionTrigger>What are the limitations of the model?</AccordionTrigger>
           <AccordionContent>
             The model makes a few simplifying assumptions. First off, it simulates a <strong>constant,
-            average race power</strong>, so it doesn't capture
+            average race power</strong> with <strong>no braking</strong>, so it doesn't capture
             natural changes in power that would occur if you were going up a hill, passing
-            someone, or coasting downhill. In addition, it assumes that your <strong><Code>CdA</Code> remains
+            someone, coasting downhill, or braking through a tight turn. In addition, it assumes that your <strong><Code>CdA</Code> remains
             constant</strong>, and that you aren't switching between different aerodynamic positions. If you
             get out of aero many times to drink, for example, then your time would be slower than what the
             simulator predicts.
