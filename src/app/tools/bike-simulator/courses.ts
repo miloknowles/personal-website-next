@@ -1,69 +1,105 @@
 export const COURSES = [
   {
     value: "santacruz_703",
-    label: "Santa Cruz 70.3",
+    label: "70.3 Santa Cruz",
     emoji: "🇺🇸",
     url: "/courses/IM_Santa_Cruz_70.3.json",
   },
   {
     value: "stgeorge_703",
-    label: "St. George 70.3",
+    label: "70.3 St. George",
     emoji: "🇺🇸",
     url: "/courses/IM_St_George_70.3.json",
   },
   {
     value: "texas_703",
-    label: "Texas 70.3",
+    label: "70.3 Texas",
     emoji: "🇺🇸",
     url: "/courses/IM_Texas_70.3.json",
   },
   {
     value: "haleakala_kom",
-    label: "Haleakala KOM",
+    label: "KOM: Haleakala",
     emoji: "🇺🇸",
     url: "/courses/Haleakala_Climb.json",
   },
   {
     value: "oceanside_703",
-    label: "Oceanside 70.3",
+    label: "70.3 Oceanside",
     emoji: "🇺🇸",
     url: "/courses/IM_Oceanside_70.3.json",
   },
   {
     value: "indian_wells_703",
-    label: "Indian Wells 70.3",
+    label: "70.3 Indian Wells",
     emoji: "🇺🇸",
     url: "/courses/IM_Indian_Wells_70.3.json",
   },
   {
     value: "taupo_703",
-    label: "Taupo 70.3",
+    label: "70.3 Taupo",
     emoji: "🇳🇿",
     url: "/courses/IM_Taupo_70.3.json",
   },
   {
     value: "chattanooga_703",
-    label: "Chattanooga 70.3",
+    label: "70.3 Chattanooga",
     emoji: "🇺🇸",
     url: "/courses/IM_Chattanooga_70.3.json",
   },
   {
     value: "florida_703",
-    label: "Florida 70.3",
+    label: "70.3 Florida",
     emoji: "🇺🇸",
     url: "/courses/IM_Florida_70.3.json",
   },
   {
     value: "hawaii_703",
-    label: "Hawaii 70.3",
+    label: "70.3 Hawaii",
     emoji: "🇺🇸",
     url: "/courses/IM_Hawaii_70.3.json",
   },
   {
     value: "morro_bay_703",
-    label: "Morro Bay 70.3",
+    label: "70.3 Morro Bay",
     emoji: "🇺🇸",
     url: "/courses/IM_Morro_Bay_70.3.json",
+  },
+  {
+    value: "boulder_703",
+    label: "70.3 Boulder",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Boulder_70.3.json",
+  },
+  {
+    value: "des_moines_703",
+    label: "70.3 Des Moines",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Des_Moines_70.3.json",
+  },
+  {
+    value: "eagleman_703",
+    label: "70.3 Eagleman",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Eagleman_70.3.json",
+  },
+  {
+    value: "couer_dalene_703",
+    label: "70.3 Couer D'Alene",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Couer_D'Alene_70.3.json",
+  },
+  {
+    value: "happy_valley_703",
+    label: "70.3 Happy Valley",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Happy_Valley_70.3.json",
+  },
+  {
+    value: "mont_tremblant_703",
+    label: "70.3 Mont Tremblant",
+    emoji: "🇨🇦",
+    url: "/courses/IM_Mont_Tremblant_70.3.json",
   },
   // {
   //   value: "nice_703",
@@ -72,8 +108,8 @@ export const COURSES = [
   // },
   {
     value: "kona_im",
-    label: "Kona Ironman",
+    label: "Ironman World Championships (Kona)",
     emoji: "🤙",
     url: "/courses/IM_Kona_140.6.json",
   }
-];
+].sort((a, b) => a.label < b.label ? -1 : 1);
