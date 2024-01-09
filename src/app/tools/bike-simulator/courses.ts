@@ -96,6 +96,30 @@ export const COURSES = [
     url: "/courses/IM_Happy_Valley_70.3.json",
   },
   {
+    value: "augusta_703",
+    label: "70.3 Augusta",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Augusta_70.3.json",
+  },
+  {
+    value: "maine_703",
+    label: "70.3 Maine",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Maine_70.3.json",
+  },
+  {
+    value: "north_carolina_703",
+    label: "70.3 North Carolina",
+    emoji: "🇺🇸",
+    url: "/courses/IM_North_Carolina_70.3.json",
+  },
+  {
+    value: "waco_703",
+    label: "70.3 Waco",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Waco_70.3.json",
+  },
+  {
     value: "mont_tremblant_703",
     label: "70.3 Mont Tremblant",
     emoji: "🇨🇦",
@@ -106,6 +130,12 @@ export const COURSES = [
   //   label: "Nice 70.3",
   //   emoji: "🇫🇷",
   // },
+  {
+    value: "lake_placid_im",
+    label: "Ironman Lake Placid",
+    emoji: "🇺🇸",
+    url: "/courses/IM_Lake_Placid_140.6.json",
+  },
   {
     value: "kona_im",
     label: "Ironman World Championships (Kona)",
