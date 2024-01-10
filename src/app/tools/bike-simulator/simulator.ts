@@ -89,7 +89,7 @@ export async function simulate(params: Params) {
 
     // Check if velocity will go zero or negative and override.
     let P_legs_override = 0;
-    if (F_dt < (F_drag + F_grav + F_roll + (massTotalKg * (params.velocityMin - v_t))/params.timestep)) {
+    if (iter > 50 && F_dt < (F_drag + F_grav + F_roll + (massTotalKg * (params.velocityMin - v_t))/params.timestep)) {
       F_dt = (F_drag + F_grav + F_roll + (massTotalKg * (params.velocityMin - v_t))/params.timestep);
       P_legs_override = F_dt;
       errors.push("override_power");
