@@ -162,19 +162,25 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
           </DialogTrigger>
           <DialogContent>
             <Flex direction="column" gap="4" align="start">
-              <Heading size="7">How it works</Heading>
+              <Heading size="7">Instructions</Heading>
               <Text className="pt-2">
                 This tool predicts what your race time will be on a bike course, taking into
-                account the elevation profile and key parameters like your average power, CdA, rolling resistance, air density, etc.
-              </Text>
-              <Text weight="medium" color="indigo">
-                You can use the tool to (1) estimate what a realistic bike split might be, and (2)
-                play with parameters to improve performance.
+                account the elevation profile and key parameters like your average power, CdA,
+                rolling resistance, air density, etc. It's meant to answer questions like:
               </Text>
               <Text>
-                Internally, the simulator reads in a <Code>.gpx</Code> or <Code>.fit</Code> file, and then
-                simulates what would happen if you cycle at a constant race power. To see a derivation for
-                the physics equations, I'd recommend this <RadixLink href="https://www.gribble.org/cycling/power_v_speed.html">page</RadixLink> by Steve Gribble.
+                "How much faster could I go if I put out 10 more watts?"
+              </Text>
+              <Text>
+                "How much time could I save by improving my position?"
+              </Text>
+              <Text>
+                "How much nutrition do I need to plan for?"
+              </Text>
+              <Text weight="medium" color="indigo">
+                You can play around with the tool to estimate what a realistic bike split might be
+                and also adjust parameters to try to improve your performance. For more information,
+                read the FAQs below.
               </Text>
               <DialogClose>
                 <Button variant="secondary" className="ml-auto">Close</Button>

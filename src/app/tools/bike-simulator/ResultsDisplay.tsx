@@ -85,7 +85,7 @@ export default function ResultsDisplay({ units } : IResultsDisplayProps) {
   const avgGravLosses = chartData.map(v => v.P_grav).reduce((a, b) => a + b) / chartData.length;
 
   const warningOverride = errors?.includes("override_power") ?
-    <CalloutRoot mt="4" color="yellow">
+    <CalloutRoot mt="4" color="gray">
       <CalloutText>
         <strong>Warning:</strong> Had to go above target power at <Code>{errors.filter(v => v === "override_power").length}</Code> timesteps to make it up a steep hill.
       </CalloutText>
@@ -208,7 +208,7 @@ export default function ResultsDisplay({ units } : IResultsDisplayProps) {
           valueFormatter={(v) => v.toLocaleString("default", { maximumFractionDigits: 1 }) + (units === "metric" ? " km/h" : " mph")}
         />
 
-        <Title className="pl-2">Power losses</Title>
+        <Title className="pl-2">Power Losses</Title>
         <LineChart
           className="h-48 mb-2"
           data={chartData}
