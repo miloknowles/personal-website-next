@@ -1,10 +1,8 @@
-import { Code, Flex, Text } from "@radix-ui/themes";
-import { Link as RadixLink } from "@radix-ui/themes";
+import { Flex, Text } from "@radix-ui/themes";
 
 import InputLabel from "./InputLabel";
 
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -18,7 +16,7 @@ import InputIndicator from "./InputIndicator";
 
 
 
-export default function RollingInput(props: { form: ToolbarFormType, avgCrr: number }) {
+export default function RollingInput(props: { form: ToolbarFormType, value: number }) {
   return (
     <Flex direction="column" gap="2" className="w-full">
       <InputLabel
@@ -53,7 +51,7 @@ export default function RollingInput(props: { form: ToolbarFormType, avgCrr: num
       />
       <Flex gap="2">
         <InputIndicator
-          value={props.avgCrr}
+          value={props.value}
           choices={[
             { label: "Bad", value: presetsCRR.bad, color: "orange" },
             { label: "Average", value: presetsCRR.average, color: "yellow" },

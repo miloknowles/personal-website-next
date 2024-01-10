@@ -7,7 +7,6 @@ const R = 8.3144598 // N·m/(mol·K), universal gas constant
 const Rv = 461.495 // J/(kg K, specific gas constant of water vapor
 const Rd = 287.05 // J/(kg K, specific gas constant of dry air
 const Pb = 101325; // Pa
-const rhoSeaLevel = 1.225 // kg/m3
 const zeroDegCelsiusInKelvin = 273.15;
 
 
@@ -39,6 +38,7 @@ function interpolate(data: Point[], i0: number, i1: number, x: number, property:
 }
 
 
+// NOTE(milo): RH should be between 0-1
 function getRho(y: number, Tb_kelvin: number, RH: number) {
   // Calculate the pressure of dry air at the given temperature and altitude.
   // See Density Equation 2: https://en.wikipedia.org/wiki/Barometric_formula
@@ -80,7 +80,7 @@ export async function simulate(params: Params) {
     const I = getCurrentIndex(data.data, i, x_t);
     const alt = interpolate(data.data, I[0], I[1], x_t, "y");
     const theta = interpolate(data.data, I[0], I[1], x_t, "a");
-    const rho = getRho(alt, params.ambientTempCelsius + zeroDegCelsiusInKelvin, 0);
+    const rho = getRho(alt, params.ambientTempCelsius + zeroDegCelsiusInKelvin, params.relativeHumidity / 100);
     const v_hw = 0;
 
     const F_drag = 0.5 * rho * CdA * (v_t + v_hw)**2;

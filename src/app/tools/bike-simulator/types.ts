@@ -25,6 +25,7 @@ export interface Params {
   massBikeKg: number
   massRiderKg: number
   ambientTempCelsius: number
+  relativeHumidity: number
 
   velocityMin: number
   timestep: number
@@ -53,6 +54,7 @@ export interface Results {
     computeIters: number
     totalDistanceMeters: number
     totalGainMeters: number
+    courseName: string
   }
 }
 
@@ -65,4 +67,5 @@ export type ToolbarFormType = UseFormReturn<{
   massRiderKg: number;
   massBikeKg: number;
   ambientTempCelsius: number;
+  relativeHumidity: number;
 }, any, undefined>

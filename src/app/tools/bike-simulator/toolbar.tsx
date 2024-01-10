@@ -34,6 +34,8 @@ import { Badge, NumberInput, Tab, TabGroup, TabList, TabPanel, TabPanels } from 
 import { presetsCRR, presetsCdA, presetsDtl } from "./presets";
 import { simulate } from "./simulator";
 import RollingInput from "./RollingInput";
+import LossInput from "./LossInput";
+import CdAInput from "./CdAInput";
 
 
 const formSchema = z.object({
@@ -47,6 +49,7 @@ const formSchema = z.object({
   massRiderKg: z.coerce.number().min(10).max(200),
   massBikeKg: z.coerce.number().min(1).max(30),
   ambientTempCelsius: z.coerce.number().min(-18).max(45),
+  relativeHumidity: z.coerce.number().min(0).max(100),
 });
 
 
@@ -80,26 +83,6 @@ const Label = (props: { title: string, units: string, description: any }) => {
 }
 
 
-const Indicator = (props: { value: number, choices: { value: number, label: string, color: string }[], setValue: (v: number) => void }) => {
-  const badges = props.choices.map((c, i) => (
-    <Badge
-      key={c.value}
-      size="sm"
-      color={(
-        (i === 0 && props.value >= c.value) || // First option
-        (i >= (props.choices.length - 1) && props.value <= c.value) || // Last option
-        (props.value <= c.value && props.value > props.choices[i + 1].value)
-      ) ? c.color : "gray"}
-      onClick={() => props.setValue(c.value)}
-    >
-      {c.label}
-    </Badge>
-  ));
-
-  return badges;
-}
-
-
 interface IToolbarProps {
   units: "imperial" | "metric"
   setUnits: (units: "imperial" | "metric") => void
@@ -124,6 +107,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
       massRiderKg: 75,
       massBikeKg: 10,
       ambientTempCelsius: 20,
+      relativeHumidity: 0,
     },
   });
 
@@ -150,7 +134,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
 
     // Mutate the cache to include the latest results. This makes it globally
     // accessible to other components tht fetch the same key.
-    mutate('/api/simulate', { states: results.filter((v, i) => ((i % takeEveryNth) === 0)), errors, meta }, {
+    mutate('/api/simulate', { states: results.filter((v, i) => ((i % takeEveryNth) === 0)), errors, meta: { ...values, ...meta } }, {
       populateCache: (resultData, currentData) => {
         return resultData;
       },
@@ -216,7 +200,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
       </Flex>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <Grid columns={{initial: "1", sm: "3", lg: "4"}} gap="6">
+        <Grid columns={{initial: "1", sm: "2", lg: "4"}} gap="6">
           <Flex gap="4" direction="column">
             <Heading size="7">Inputs</Heading>
             <FormField
@@ -301,102 +285,12 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
           </Flex>
 
           <Flex direction="column" gap="4">
-            <RollingInput form={form} avgCrr={_avgCrr}/>
-
-            <Flex direction="column" gap="2" className="w-full">
-              <Label
-                title="Drivetrain loss"
-                units="%"
-                description="This is the percentage of pedaling power that is lost due to friction in your chain and drivetrain. It's typically in the 2-5% range and can be reduced by things like cleaning and waxing your chain."
-              />
-              <FormField
-                control={form.control}
-                name="lossDrivetrain"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                    <NumberInput
-                      {...field}
-                      placeholder="Lower is better"
-                      step={0.1}
-                      formNoValidate
-                      min={0.1}
-                      max={20}
-                      required
-                    />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Flex gap="2">
-                <Indicator
-                  value={_dtl}
-                  choices={[
-                    { label: "Bad", value: presetsDtl.bad, color: "orange" },
-                    { label: "Average", value: presetsDtl.average, color: "yellow" },
-                    { label: "Good", value: presetsDtl.good, color: "blue" },
-                    { label: "Great", value: presetsDtl.excellent, color: "green" }
-                  ]}
-                  setValue={(v) => form.setValue("lossDrivetrain", v)}
-                />
-              </Flex>
-            </Flex>
+            <RollingInput form={form} value={_avgCrr}/>
+            <LossInput form={form} value={_dtl}/>
           </Flex>
 
           <Flex direction="column" gap="4">
-            <Flex direction="column" gap="2" className="w-full">
-              <Label
-                title="CdA"
-                units="m2"
-                description={
-                  <Flex gap="2" direction="column">
-                    <Text>
-                      Your coefficient of drag, or <Code>CdA</Code>, is a measure of how aerodynamic you are, and is one of the most important parameters for race performance.
-                    </Text>
-                    <Text>
-                      If you have a wind tunnel or track, you can measure this. Otherwise, the "Chung method" can be used for estimation, and there are several "aerometers" on the market now that combine measurement and estimation.
-                    </Text>
-                    <Text>
-                      If you don't know this number, you can do some googling about your bike setup
-                      and position to make an educated guess.
-                    </Text>
-                  </Flex>
-                }
-              />
-              <FormField
-                control={form.control}
-                name="avgCdA"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                    <NumberInput
-                      {...field}
-                      placeholder="Lower is better"
-                      step={0.005}
-                      min={0.1}
-                      max={0.5}
-                      required
-                    />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Flex gap="2" wrap="wrap">
-                <Indicator
-                  value={_cda}
-                  choices={[
-                    { label: "Hoods", value: presetsCdA.upright, color: "orange" },
-                    { label: "Drops", value: presetsCdA.drops, color: "yellow" },
-                    { label: "Aero", value: presetsCdA.aero, color: "blue" },
-                    { label: "Optimized", value: presetsCdA.optimized, color: "teal" },
-                    { label: "Pro", value: presetsCdA.pro, color: "green" }
-                  ]}
-                  setValue={(v) => form.setValue("avgCdA", v)}
-                />
-              </Flex>
-            </Flex>
+            <CdAInput form={form} value={_cda}/>
 
             <Flex direction="column" gap="2" className="w-full">
               <Label
@@ -434,6 +328,42 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
                 )}
               />
             </Flex>
+
+            <Flex direction="column" gap="2" className="w-full">
+              <Label
+                title="Relative humidity"
+                units={"%"}
+                description={
+                  <Flex gap="2" direction="column">
+                    <Text>
+                      Counterintuitively, more humid air is less dense, and therefore faster. This
+                      is because the molecular weight of water is less than the average air molecule.
+                      All else equal, you'll go faster on a more humid day.
+                    </Text>
+                  </Flex>
+                }
+              />
+              <FormField
+                control={form.control}
+                name="relativeHumidity"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                    <NumberInput
+                      placeholder="Relative humidity"
+                      value={field.value}
+                      onValueChange={(v) => form.setValue("relativeHumidity", v)}
+                      step={1}
+                      min={0}
+                      max={100}
+                      required
+                    />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </Flex>
           </Flex>
         </Grid>
         <Button
@@ -443,7 +373,10 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
         >
           {
             loading ?
-              <Flex align="center"><Loader2 className="mr-2 h-4 w-4 animate-spin" /><Text>Simulating</Text></Flex> :
+              <Flex align="center">
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Text>Simulating</Text>
+              </Flex> :
               "Run simulation"
           }
         </Button>

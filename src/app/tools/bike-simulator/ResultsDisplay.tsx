@@ -6,6 +6,7 @@ import { AreaChart, LineChart, Table, TableBody, TableCell, TableHead, TableHead
 import useSWR from "swr"
 import { Results } from "./types";
 import MetricCard from "./MetricCard";
+import { Button } from "@/components/ui/button";
 
 
 const metersPerSecToMph = 2.23694;
@@ -39,6 +40,19 @@ export default function ResultsDisplay({ units } : IResultsDisplayProps) {
       {/* @ts-ignore */}
       <CalloutText>Something went wrong! 👀</CalloutText>
     </CalloutRoot>)
+  }
+
+  const createDownload = (event: React.MouseEvent) => {
+    const downloadTarget = document.getElementById("download-target");
+    const content = 'data:text/json;charset=utf-8,' + JSON.stringify(data.states);
+    const encoded = encodeURI(content);
+
+    if (!downloadTarget) return;
+
+    downloadTarget.setAttribute('href', encoded);
+    downloadTarget.setAttribute('download', `${data.meta.courseName}.json`);
+    downloadTarget.setAttribute('target', '_blank');
+    downloadTarget.click();
   }
 
   const errors = data.errors;
@@ -110,14 +124,18 @@ export default function ResultsDisplay({ units } : IResultsDisplayProps) {
       <Flex direction="column" className="w-full" align="start">
         <Flex className="w-full">
           <Heading size="7">Results</Heading>
-          {/* <Button className="ml-auto" onClick={() => {
-
-          }}>Download raw data</Button> */}
+          <a className="hidden" id="download-target"/>
+          <Button
+            className="ml-auto"
+            onClick={createDownload}
+          >
+            Download raw data
+          </Button>
         </Flex>
-        <Text size="1" className="text-muted-foreground">
+        {/* <Text size="1" className="text-muted-foreground">
           Simulated <Code>{data.meta.computeIters || "N/A"}</Code> timesteps
           in <Code>{data.meta.computeSec.toLocaleString("default", {maximumFractionDigits: 2}) || "N/A"} seconds</Code>
-        </Text>
+        </Text> */}
         {warningOverride}
       </Flex>
 
