@@ -20,12 +20,12 @@ export default function Page() {
   return (
     <Section size={{initial: "1", md: "3"}} p={{initial: "3", md: "8"}}>
       <Container size="3">
-        <Flex direction={{initial: "column", md: "row"}} gap="8">
+        <Flex direction={{initial: "column", sm: "row"}} gap="8">
           {/* MAIN CONTENT */}
-          <div className="max-w-[600px] flex flex-col gap-3 relative" id="body-column">
+          <div className="max-w-[600px] flex flex-col flex-grow gap-3 relative" id="body-column">
             <Flex direction="column" gap="4" className="pb-4">
               <Text size="2" color="gray">January 12, 2024</Text>
-              <Heading size="9">
+              <Heading size="9" className="text-5xl">
                 How should companies and individuals fund climate mitigation?
               </Heading>
             </Flex>
@@ -309,10 +309,17 @@ export default function Page() {
               a meaningful amount of profits on a public good, rather than spending a paltry sum
               on a climate marketing expense.
             </Text>
+
+            <Heading size="7" mt="4">
+              Acknowledgements
+            </Heading>
+            <Text>
+              Special thanks to Sebastian Quaade for his collaboration and feedback on this post!
+            </Text>
           </div>
 
           {/* SIDENOTES */}
-          <div className="flex-grow max-w-[360px]">
+          <div className="min-w-[300px] max-w-[500px]">
             <SidenoteColumn gap={16}>
               <Sidenote refId="ref-1-registries" refTag="1">
                 I can speak from experience here. When our team submitted a new methodology for

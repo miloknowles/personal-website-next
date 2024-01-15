@@ -22,7 +22,7 @@ interface SidenoteProps {
 
 export function Sidenote({ children, refId, refTag }: SidenoteProps) {
   return (
-    <div className="text-xs absolute hidden" data-ref-id={refId} id={`sidenote-${refId}`}>
+    <div className="text-xs hidden static md:absolute py-2" data-ref-id={refId} id={`sidenote-${refId}`}>
       <sup className="pr-1">({refTag})</sup>
       {children}
     </div>
@@ -54,6 +54,7 @@ export function SidenoteColumn({ children, gap }: SidenoteColumnProps) {
       const maxY = wrapper.clientHeight - element.offsetHeight - (gap || 0);
       const top = Math.min(maxY, Math.max(ref.offsetTop, minY));
       element.style.top = `${top}px`;
+      // element.classList.add(`sm:top-[${top}px]`);
       element.classList.remove("hidden");
 
       minY = top + element.offsetHeight + (gap || 0);
