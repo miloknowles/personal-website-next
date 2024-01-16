@@ -30,12 +30,12 @@ export function Sidenote({ children, refId, refTag, sideBreakpoint }: SidenotePr
   );
 }
 
-interface SidenoteColumnProps {
+interface SidenoteAutoLayoutProps {
   children: any
-  gap?: number
+  gapPx?: number
 }
 
-export function SidenoteColumn({ children, gap }: SidenoteColumnProps) {
+export function SidenoteAutoLayout({ children, gapPx }: SidenoteAutoLayoutProps) {
   // @ts-ignore
   const arrayChildren: React.ReactElement<SidenoteProps>[] = React.Children.toArray(children);
 
@@ -44,7 +44,7 @@ export function SidenoteColumn({ children, gap }: SidenoteColumnProps) {
     let minY = 0;
 
     arrayChildren.forEach((child) => {
-      const wrapper = document.getElementById("body-column");
+      const wrapper = document.getElementById("blog-wrapper");
       const element = document.getElementById(`sidenote-${child.props.refId}`);
       const ref = document.getElementById(child.props.refId);
 
@@ -54,19 +54,19 @@ export function SidenoteColumn({ children, gap }: SidenoteColumnProps) {
       }
 
       // Don't go below the bottom of the body text.
-      const maxY = wrapper.clientHeight - element.offsetHeight - (gap || 0);
+      const maxY = wrapper.clientHeight - element.offsetHeight - (gapPx || 0);
       const top = Math.min(maxY, Math.max(ref.offsetTop, minY));
       element.style.top = `${top}px`;
 
       // Become visible after positioning is done to prevent jumpy appearance.
       element.classList.remove("hidden");
 
-      minY = top + element.offsetHeight + (gap || 0);
+      minY = top + element.offsetHeight + (gapPx || 0);
     })
   }, []);
 
   return (
-    <div className="relative" id="sidenote-column">
+    <div className="relative">
       {children}
     </div>
   );
