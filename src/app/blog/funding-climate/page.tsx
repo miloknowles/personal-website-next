@@ -50,7 +50,7 @@ export default function Page() {
               </li>
             </ul>
             <Text>
-              To be clear: in this post I’m critiquing the voluntary carbon market as it exists now. My criticisms don’t apply to a potential future market where high-quality, permanent carbon removal becomes the norm.
+              To be clear: in this post I’m critiquing the voluntary carbon market <em>as it exists now</em>. My criticisms don’t apply to a potential future market where high-quality, permanent carbon removal becomes the norm.
             </Text>
 
             <Heading size="7" mt="4">
@@ -110,7 +110,7 @@ export default function Page() {
             </Text>
             <Text>
               I’ll use the Climate Neutral label as an example of getting brands involved in climate.
-              As of September, 2023, there were <Code>325</Code> brands certified under the Climate Neutral label,
+              As of September, 2023, there were 325 brands certified under the Climate Neutral label,
               meaning that they had inventoried their emissions, committed to a plan of action,
               and purchased offsets to neutralize ongoing emissions. Most of these companies are
               consumer retail brands that reach a lot of people, and I think it’s awesome that
@@ -195,8 +195,7 @@ export default function Page() {
             </Text>
             <ul className="list-disc pl-4">
               <li>
-                You could purchase 40M high-quality reforestation credits at $50/ton, causing 40M
-                tons of CO2 to be removed from the atmosphere as the trees grow.
+                You could purchase 40 million high-quality reforestation credits at $50/ton.
               </li>
               <li>
                 You could donate $20M each to 100 nonprofits advocating for better climate policy
@@ -314,7 +313,7 @@ export default function Page() {
               Acknowledgements
             </Heading>
             <Text>
-              Special thanks to Sebastian Quaade for his collaboration and feedback on this post!
+              Special thanks to Sebastian Quaade for his collaboration and feedback on this post.
             </Text>
           </div>
 

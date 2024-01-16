@@ -18,11 +18,12 @@ interface SidenoteProps {
   children: any
   refTag: string
   refId: string
+  sideBreakpoint?: string
 }
 
-export function Sidenote({ children, refId, refTag }: SidenoteProps) {
+export function Sidenote({ children, refId, refTag, sideBreakpoint }: SidenoteProps) {
   return (
-    <div className="text-xs hidden static md:absolute py-2" data-ref-id={refId} id={`sidenote-${refId}`}>
+    <div className={`text-xs hidden static ${sideBreakpoint || "md"}:absolute py-2`} data-ref-id={refId} id={`sidenote-${refId}`}>
       <sup className="pr-1">({refTag})</sup>
       {children}
     </div>
@@ -39,6 +40,7 @@ export function SidenoteColumn({ children, gap }: SidenoteColumnProps) {
   const arrayChildren: React.ReactElement<SidenoteProps>[] = React.Children.toArray(children);
 
   useEffect(() => {
+    // Keep track of the end of the previous sidenote to avoid overlap.
     let minY = 0;
 
     arrayChildren.forEach((child) => {
@@ -51,10 +53,12 @@ export function SidenoteColumn({ children, gap }: SidenoteColumnProps) {
         return;
       }
 
+      // Don't go below the bottom of the body text.
       const maxY = wrapper.clientHeight - element.offsetHeight - (gap || 0);
       const top = Math.min(maxY, Math.max(ref.offsetTop, minY));
       element.style.top = `${top}px`;
-      // element.classList.add(`sm:top-[${top}px]`);
+
+      // Become visible after positioning is done to prevent jumpy appearance.
       element.classList.remove("hidden");
 
       minY = top + element.offsetHeight + (gap || 0);
