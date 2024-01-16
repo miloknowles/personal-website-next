@@ -1,4 +1,4 @@
-import { Container, Flex, Heading, Link, Section, Separator, Text } from "@radix-ui/themes";
+import { Badge, Container, Flex, Heading, Link, Section, Separator, Text } from "@radix-ui/themes";
 import { Metadata } from "next";
 
 
@@ -22,6 +22,9 @@ export default function Page() {
               <Heading size="7">
                 Blog
               </Heading>
+              <Link href="/blog/funding-climate">
+                <Badge>New</Badge> How should companies and individuals fund climate mitigation?
+              </Link>
               <Link href="/blog/bluemeadow">
                 Blue Meadow: What I learned from a year as a solo founder
               </Link>
