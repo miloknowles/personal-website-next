@@ -1,7 +1,8 @@
-import { Text, Heading, Flex, Code, Container, Section, Strong, Blockquote } from "@radix-ui/themes";
+import { Text, Heading, Flex, Code, Container, Section, Strong, Blockquote, CalloutRoot, CalloutText } from "@radix-ui/themes";
 import { Metadata } from "next";
 import { Link as RadixLink } from "@radix-ui/themes";
 import { Ref, Sidenote, SidenoteColumn } from "@/components/Blog/Sidenotes";
+import ClimateNeutralChart from "./ClimateNeutralChart";
 
 
 export const metadata: Metadata = {
@@ -20,14 +21,17 @@ export default function Page() {
   return (
     <Section size={{initial: "1", md: "3"}} p={{initial: "3", md: "8"}}>
       <Container size="3">
-        <Flex direction={{initial: "column", sm: "row"}} gap="8">
+        <Flex direction={{initial: "column", md: "row"}} gap="8">
           {/* MAIN CONTENT */}
-          <div className="max-w-[600px] flex flex-col flex-grow gap-3 relative" id="body-column">
+          <div className="flex flex-col flex-grow gap-3 relative" id="body-column">
             <Flex direction="column" gap="4" className="pb-4">
               <Text size="2" color="gray">January 12, 2024</Text>
               <Heading size="9" className="text-5xl">
                 How should companies and individuals fund climate mitigation?
               </Heading>
+              <CalloutRoot className="block lg:hidden">
+                <CalloutText>To see sidenotes next to their references, please view this on desktop.</CalloutText>
+              </CalloutRoot>
             </Flex>
             <Text>
               I spent about ~18 months working on a carbon offsetting startup. In the process, I
@@ -100,7 +104,6 @@ export default function Page() {
             <Heading size="7" mt="4">
               Offsetting gives companies and individuals a (deceptively) easy way to help
             </Heading>
-
             <Text>
               In my view, the voluntary carbon market did accomplish one good thing: getting
               more companies and individuals to contribute money to climate change (mitigation).
@@ -121,6 +124,8 @@ export default function Page() {
               set the bar too low. I scraped the offset purchases data from Climate Neutral and include
               the results below to illustrate this.
             </Text>
+
+            <ClimateNeutralChart/>
 
             <Text>
               The median Climate Neutral company paid <Code>$10/ton</Code> to offset their emissions, with many
@@ -318,7 +323,7 @@ export default function Page() {
           </div>
 
           {/* SIDENOTES */}
-          <div className="min-w-[300px] max-w-[500px]">
+          <div className="min-w-[300px] max-w-[400px]">
             <SidenoteColumn gap={16}>
               <Sidenote refId="ref-1-registries" refTag="1">
                 I can speak from experience here. When our team submitted a new methodology for

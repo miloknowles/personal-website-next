@@ -23,7 +23,7 @@ interface SidenoteProps {
 
 export function Sidenote({ children, refId, refTag, sideBreakpoint }: SidenoteProps) {
   return (
-    <div className={`text-xs hidden static ${sideBreakpoint || "md"}:absolute py-2`} data-ref-id={refId} id={`sidenote-${refId}`}>
+    <div className={`text-xs hidden static lg:absolute py-2`} data-ref-id={refId} id={`sidenote-${refId}`}>
       <sup className="pr-1">({refTag})</sup>
       {children}
     </div>
