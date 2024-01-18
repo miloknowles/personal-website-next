@@ -381,7 +381,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
         <Button
           className=""
           type="submit"
-          disabled={loading}
+          disabled={loading || !_courseName}
         >
           {
             loading ?

@@ -67,7 +67,8 @@ export async function simulate(params: Params) {
   let x_t = 0;
   let v_t = 0;
 
-  const totalDist = data.meta.totalDistanceMeters;
+  // Use the exact distance of the course file, rather than the assumed race distance.
+  const totalDist = data.data.at(-1)?.x || data.meta.totalDistanceMeters;
   const massTotalKg = params.massBikeKg + params.massRiderKg;
 
   let iter = 1;
