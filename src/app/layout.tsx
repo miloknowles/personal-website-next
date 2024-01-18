@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 
 import '@radix-ui/themes/styles.css';
 // https://www.radix-ui.com/themes/docs/theme/token-reference
@@ -34,6 +35,9 @@ export default function RootLayout({
           rel="icon"
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>"
         />
+        {/* <Script src="/segment.js" async/> */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-BGELZ7CXQ0" async/>
+        <Script src="/gtag.js" async/>
       </head>
       <body className={inter.className}>
         <Theme appearance="dark" accentColor="indigo" radius="medium">
