@@ -147,6 +147,7 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
   const _avgCrr = form.watch("avgCrr");
   const _cda = form.watch("avgCdA");
   const _dtl = form.watch("lossDrivetrain");
+  const _courseName = form.watch("courseName");
 
   return (
     <Flex direction="column" gap="6" justify="center" align="start" className="w-full">
@@ -217,6 +218,11 @@ export default function Toolbar({units, setUnits} : IToolbarProps) {
               )}
             />
             <CourseCallout/>
+            {
+              (_courseName && (COURSES.findIndex(v => v.value === _courseName) >= 0)) ?
+                <RadixLink href={COURSES.find(v => v.value === _courseName)?.origin} target="_blank">View course file</RadixLink> :
+                undefined
+            }
           </Flex>
 
           <Flex direction="column" gap="4" className="w-full">
