@@ -59,7 +59,7 @@ export default function Navigation() {
               <BigLink href="/work" onClick={onClickLink}>Work</BigLink>
               <BigLink href="/writing" onClick={onClickLink}>Writing</BigLink>
               <BigLink href="/tools" onClick={onClickLink}>Triathlon</BigLink>
-              {/* <BigLink href="https://resume.io/r/NGZYn7sIv" onClick={onClickLink} target={"_blank"}>Resume</BigLink> */}
+              <BigLink href="https://resume.io/r/SpKiDZiF1" onClick={onClickLink} target={"_blank"}>CV</BigLink>
               <Flex>
                 <Socials size={64} color="white"/>
               </Flex>
