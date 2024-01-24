@@ -1,6 +1,11 @@
-import { Text, Heading, Flex, Code, Container, Section, Strong } from "@radix-ui/themes";
+import { Text, Heading, Code, Strong } from "@radix-ui/themes";
 import { Metadata } from "next";
 import Link from "next/link";
+import { Link as RadixLink } from "@radix-ui/themes";
+
+import { BlogSection, BlogWrapper, ContentContainer, SidenotesContainer } from "@/components/Blog/Wrappers";
+import Header from "@/components/Blog/Header";
+import { Ref, Sidenote, SidenoteAutoLayout } from "@/components/Blog/Sidenotes";
 
 
 export const metadata: Metadata = {
@@ -11,15 +16,16 @@ export const metadata: Metadata = {
 
 export default function Post() {
   return (
-    <Section size={{initial: "1", md: "3"}} p={{initial: "3", md: "8"}}>
-      <Container size="2">
-        <Flex direction="column" gap="4" style={{maxWidth: 600}}>
-          <Text size="2" color="gray">January, 2022</Text>
-          <Heading size="9">
-            Blue Meadow: What I learned from a year as a solo founder
-          </Heading>
-        </Flex>
-        <Flex direction="column" gap="4" pt="6" style={{maxWidth: 600}}>
+    <BlogWrapper>
+      <BlogSection>
+        {/* MAIN CONTENT */}
+        <ContentContainer>
+          <Header
+            title="Blue Meadow: What I learned from a year as a solo founder"
+            publishDate="January, 2022"
+            sidenoteWarning
+          />
+
           <Text>
             Over the past 15 months, I took an unexpected detour in my life to work on a startup.
           </Text>
@@ -55,7 +61,7 @@ export default function Post() {
           <Text>
             If scaled, seaweed can be a sustainable, drop-in replacement for terrestrial sources of biomass like
             corn and soy. There are a ton of cool startups making food, animal feed, plastics, fertilizers, biofuels,
-            and more out of it.<sup>[1]</sup> I became convinced that, like terrestrial agriculture, seaweed aquaculture
+            and more out of it.<Ref id="ref-1-seaweed">1</Ref> I became convinced that, like terrestrial agriculture, seaweed aquaculture
             needed <i>automation</i> to scale and become cost-competitive.
           </Text>
 
@@ -115,7 +121,7 @@ export default function Post() {
           {/* --- */}
           <Heading size="6">Co-founders filter out personal noise</Heading>
           <Text>If I had to model my instantaneous level of optimism in pseudocode, it would be something like:</Text>
-          <Code size="1">
+          <Code size="3">
             Optimism(t) = RationalSignal(t) + PersonalBias(t) + PersonalNoise(t)
           </Code>
           <Text>
@@ -129,7 +135,7 @@ export default function Post() {
             you got last night, reading a news article about your competitor, drinking too much coffee,
             spending hours trying to re-calibrate a 3D printer, or talking to someone who’s excited about
             your idea. All of these factors influence outlook, but are uncorrelated with how good an
-            idea is; they are noise.<sup>[2]</sup>
+            idea is; they are noise.<Ref id="ref-2-noise">2</Ref>
           </Text>
           <Text>
             Assuming your co-founder’s life noise is independent from your own, then averaging together
@@ -243,20 +249,22 @@ export default function Post() {
               </li>
             </ul>
           </Text>
+        </ContentContainer>
 
-          {/* --- */}
-          <Heading size="6">References & Footnotes</Heading>
-          <ol>
-            <li>
-              <sup>1</sup> Check out Akua, Symbrosia, Notpla, Sway, and C-Combinator.
-            </li>
-            <li>
-              <sup>2</sup> As a sidenote, "life noise" reminds me of the <Link href="https://www.scientificamerican.com/article/lunchtime-leniency/">"lunchtime leniency"</Link> example from
+        {/* SIDENOTES */}
+        <SidenotesContainer>
+          <SidenoteAutoLayout gapPx={16}>
+            <Sidenote refId="ref-1-seaweed" refTag="1">
+              Check out Akua, Symbrosia, Notpla, Sway, and C-Combinator.
+            </Sidenote>
+
+            <Sidenote refId="ref-2-noise" refTag="2">
+              As a sidenote, "life noise" reminds me of the <Link href="https://www.scientificamerican.com/article/lunchtime-leniency/">"lunchtime leniency"</Link> example from
               Thinking Fast and Slow, where judges are more likely to grant parole after a snack break.
-            </li>
-          </ol>
-        </Flex>
-      </Container>
-    </Section>
-  )
+            </Sidenote>
+          </SidenoteAutoLayout>
+        </SidenotesContainer>
+      </BlogSection>
+    </BlogWrapper>
+  );
 }

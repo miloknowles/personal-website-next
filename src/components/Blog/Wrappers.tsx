@@ -4,6 +4,7 @@ type ResponsivePadding = Responsive<"0" | "6" | "1" | "2" | "3" | "4" | "5" | "7
 type ResponsiveWidth = Responsive<"1" | "2" | "3" | "4">;
 
 
+// This is the main outer container, which houses both the content and sidenotes.
 export function BlogWrapper(props: { children: any }) {
   return (
     <Section
@@ -12,7 +13,7 @@ export function BlogWrapper(props: { children: any }) {
       pr={{initial: "3", md: "0"}}
       id="blog-wrapper"
     >
-      <Container size="3">
+      <Container size="4">
         {props.children}
       </Container>
     </Section>

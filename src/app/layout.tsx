@@ -12,7 +12,8 @@ import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
-import { Inter } from 'next/font/google'
+import { Inter, Albert_Sans } from 'next/font/google';
+import { cx } from 'class-variance-authority';
 
 
 export const metadata: Metadata = {
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
   description: "I'm a software engineer focused on climate and the food system.",
 }
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] });
+const sans = Albert_Sans({ subsets: ['latin'], variable: '--font-sans' });
 
 
 export default function RootLayout({
@@ -39,7 +41,7 @@ export default function RootLayout({
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-BGELZ7CXQ0" async/>
         <Script src="/gtag.js" async/>
       </head>
-      <body className={inter.className}>
+      <body className={cx(sans.variable)}>
         <Theme appearance="dark" accentColor="indigo" radius="medium">
           <Navigation/>
           {children}
