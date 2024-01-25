@@ -12,7 +12,7 @@ import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
-import { Inter, Albert_Sans } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { cx } from 'class-variance-authority';
 
 
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   description: "I'm a software engineer focused on climate and the food system.",
 }
 
-// const inter = Inter({ subsets: ['latin'] });
-const sans = Albert_Sans({ subsets: ['latin'], variable: '--font-sans' });
-
+const sans = Inter({ subsets: ['latin'] });
+// const sans = Poppins({ subsets: ['latin'], variable: "--font-sans", weight: ["200", "300", "400", "500", "600", "700" ] });
+// const sans = Merriweather({ subsets: ['latin'], variable: '--font-sans', weight: ["300", "400", "700"] });
 
 export default function RootLayout({
   children,

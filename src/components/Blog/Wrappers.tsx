@@ -42,7 +42,7 @@ export function BlogSection(props: {
 
 export function ContentContainer(props: { children?: any }) {
   return (
-    <div className="flex flex-col flex-grow gap-3 relative">
+    <div className="flex flex-col flex-grow gap-3 relative text-lg">
       {props.children}
     </div>
   );
