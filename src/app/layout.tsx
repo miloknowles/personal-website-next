@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description: "I'm a software engineer focused on climate and the food system.",
 }
 
-const sans = Inter({ subsets: ['latin'] });
+const sans = Inter({ subsets: ['latin'], variable: "--font-sans" });
 // const sans = Poppins({ subsets: ['latin'], variable: "--font-sans", weight: ["200", "300", "400", "500", "600", "700" ] });
 // const sans = Merriweather({ subsets: ['latin'], variable: '--font-sans', weight: ["300", "400", "700"] });
 
@@ -41,7 +41,7 @@ export default function RootLayout({
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-BGELZ7CXQ0" async/>
         <Script src="/gtag.js" async/>
       </head>
-      <body className={cx(sans.variable)}>
+      <body className={cx(sans.className)}>
         <Theme appearance="dark" accentColor="indigo" radius="medium">
           <Navigation/>
           {children}
