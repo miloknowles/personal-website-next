@@ -29,32 +29,33 @@ const ResponsiveImage = (props: { src: string, alt: string, style: any, classNam
 export default function Home() {
   return (
     <main className="">
-      <Section size={{initial: "1", lg: "2"}} pl="3" pr="3">
-        <Container size="3">
+      <Section size={{initial: "1", md: "2", lg: "3"}} pl="3" pr="3" pb="6">
+        <Container size="4">
           <Flex direction="column" gap="6">
             <Flex gap="6"> 
             <Heading size="9" style={{maxWidth: "800px"}} className="fade-order-1">
               Hi, I'm <span style={{color: "var(--indigo-10)"}}>Milo</span> – a software engineer focused on climate and the food system.
             </Heading>
             </Flex>
-            <Grid columns={{initial: "1", md: "2"}} gap="6" width="auto">
+            <Grid columns={{initial: "1", md: "2"}} gap="6" width="auto" className="text-lg">
               <Flex direction="column" gap="3">
                 <Text className="fade-order-2">
                   I studied computer science and artifical intelligence at MIT, where my research focused
-                  on computer vision for autonomous robotics. I've worked on self-driving cars and drones,
-                  data science for the energy grid, carbon crediting for plant-based foods, and a
+                  on vision and machine learning for autonomous robots. I've worked on self-driving cars and drones,
+                  data science for the energy grid, carbon crediting for sustainable foods, and a
                   variety of full-stack web projects.
                 </Text>
                 <Text className="fade-order-3">
-                  After leaving college, I started to spend more and more of my time thinking about the connections
-                  between climate change and the food system – in particular, the ecological implications
-                  of eating 70+ billion animals each year.
+                  My main focus is on climate change and the food system – in particular, the ecological implications
+                  of eating 70+ billion animals each year. I believe that a sustainable food system is the most
+                  important lever for addressing climate change, and that we need more solutions, speed, and scale there.
                 </Text>
               </Flex>
               <Flex direction="column" gap="3">
                 <Text className="fade-order-4">
-                  Right now, I'm working on launching an advance market commitment initiative for
-                  alternative proteins called <Link href="https://foodforthefuture.earth" target="_blank">Food for the Future</Link>. Stay tuned for updates!
+                  Right now, I'm looking for my next role, ideally in the alternative proteins,
+                  biomanufacturing, or climate tech more broadly.
+                  I'm also taking some time to learn about these problem spaces and write more. Stay tuned!
                 </Text>
                 <Text className="fade-order-5">
                   Outside of work, I love training and geeking out about endurance sports.
@@ -65,7 +66,7 @@ export default function Home() {
                     <RocketIcon/>
                   </CalloutIcon>
                   <CalloutText>
-                    If you're working on a something that benefits the climate or farmed animals and it seems
+                    If you're working on a project that benefits the climate or farmed animals and it seems
                     like I could help, please have a low bar for reaching out.
                   </CalloutText>
                 </CalloutRoot>
@@ -74,12 +75,15 @@ export default function Home() {
           </Flex>
         </Container>
       </Section>
-      <Section size={{initial: "1", lg: "2"}} pl="3" pr="3">
-        <Container size="3">
+      <Section size={{initial: "1", md: "2", lg: "3"}} pl="3" pr="3" pt="6">
+        <Container size="4">
           <Grid columns={{initial: "1", sm: "3"}} gap={{initial: "3", sm: "4", md: "6"}}>
-            <ResponsiveImage src="/color.jpg" alt="A picture of me" style={{minHeight: "400px"}} className="fade-order-7"/>
-            <ResponsiveImage src="/redwoods.jpg" alt="A picture of me" style={{minHeight: "400px"}} className="fade-order-8"/>
-            <ResponsiveImage src="/triathlon_color.jpg" alt="Finishing 70.3 Timberman" style={{minHeight: "400px"}} className="fade-order-9"/>
+            <ResponsiveImage
+              src="/munich.jpg" alt="Visiting Munich" style={{minHeight: "500px"}} className="fade-order-7"/>
+            <ResponsiveImage
+              src="/redwoods.jpg" alt="The redwoods in California" style={{minHeight: "500px"}} className="fade-order-8"/>
+            <ResponsiveImage
+              src="/triathlon_color.jpg" alt="Finishing a half Ironman in Laconia, NH" style={{minHeight: "500px"}} className="fade-order-9"/>
           </Grid>
         </Container>
       </Section>
