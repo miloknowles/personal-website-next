@@ -8,7 +8,7 @@ import { BlogSection, BlogWrapper, ContentContainer, SidenotesContainer } from "
 
 
 export const metadata: Metadata = {
-  title: 'How should companies and individuals fund climate mitigation?',
+  title: 'How should companies and individuals fund climate action?',
   description:
     "I spent about ~18 months working on a carbon offsetting startup. In the process, I\
     learned a lot about the voluntary carbon market and its limitations. The experience\
@@ -26,7 +26,7 @@ export default function Page() {
         {/* MAIN CONTENT */}
         <ContentContainer>
           <Header
-            title="How should companies and individuals fund climate mitigation?"
+            title="How should companies and individuals fund climate action?"
             publishDate="January 16, 2024"
             sidenoteWarning
           />
