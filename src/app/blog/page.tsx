@@ -22,6 +22,9 @@ export default function Page() {
               <Heading size="7">
                 Blog
               </Heading>
+              <Link href="/blog/green-premium-agreements">
+                <Badge>New</Badge> Green premium agreements: could we generalize PPAs to other industries?
+              </Link>
               <Link href="/blog/nonprofit-startups">
                 <Badge>New</Badge> Some types of startups should be nonprofit startups
               </Link>

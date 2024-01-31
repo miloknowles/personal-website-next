@@ -1,6 +1,5 @@
-import { Text, Heading, Code, Strong, Blockquote, Callout, CalloutRoot, CalloutText } from "@radix-ui/themes";
+import { Text, Heading, Blockquote } from "@radix-ui/themes";
 import { Metadata } from "next";
-import Link from "next/link";
 import { Link as RadixLink } from "@radix-ui/themes";
 
 import { BlogSection, BlogWrapper, ContentContainer, SidenotesContainer } from "@/components/Blog/Wrappers";
@@ -67,7 +66,12 @@ export default function Page() {
           </Text>
 
           <div className="relative w-full min-h-[350px] bg-white rounded-xl">
-            <Image src="/media/fro.png" alt="The Venn diagram for focused research organizations" objectFit="contain" fill/>
+            <Image
+              src="/media/fro.png"
+              alt="The Venn diagram for focused research organizations"
+              style={{objectFit: "contain"}}
+              fill
+            />
           </div>
           <Text className="text-center text-xs">Source: Convergent Research</Text>
 

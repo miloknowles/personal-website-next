@@ -1,6 +1,5 @@
 import { Text, Heading, Code, Strong } from "@radix-ui/themes";
 import { Metadata } from "next";
-import Link from "next/link";
 import { Link as RadixLink } from "@radix-ui/themes";
 
 import { BlogSection, BlogWrapper, ContentContainer, SidenotesContainer } from "@/components/Blog/Wrappers";
@@ -32,7 +31,7 @@ export default function Post() {
           <Text>
             Because I spent most of that time as a solo founder, summarizing my
             thoughts in writing became my proxy for having a co-founder to bounce
-            ideas off of. Similar to the <Link href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">rubber duck</Link> that a
+            ideas off of. Similar to the <RadixLink href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">rubber duck</RadixLink> that a
             software engineer might be familiar with, writing is my way of forcing myself to examine what I’m doing.
           </Text>
           <Text>
@@ -259,7 +258,7 @@ export default function Post() {
             </Sidenote>
 
             <Sidenote refId="ref-2-noise" refTag="2">
-              "Life noise" reminds me of the <Link href="https://www.scientificamerican.com/article/lunchtime-leniency/">"lunchtime leniency"</Link> example from
+              "Life noise" reminds me of the <RadixLink href="https://www.scientificamerican.com/article/lunchtime-leniency/">"lunchtime leniency"</RadixLink> example from
               Thinking Fast and Slow, where judges are more likely to grant parole after a snack break.
             </Sidenote>
           </SidenoteAutoLayout>
