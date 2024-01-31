@@ -56,7 +56,7 @@ export default function Navigation() {
           <Container size="1" p={{initial: "4", md: "0"}}>
             <Flex direction="column" gap="6">
               <BigLink href="/" onClick={onClickLink}>About</BigLink>
-              <BigLink href="/work" onClick={onClickLink}>Work</BigLink>
+              {/* <BigLink href="/work" onClick={onClickLink}>Work</BigLink> */}
               <BigLink href="/writing" onClick={onClickLink}>Writing</BigLink>
               <BigLink href="/tools" onClick={onClickLink}>Triathlon</BigLink>
               <BigLink href="https://resume.io/r/SpKiDZiF1" onClick={onClickLink} target={"_blank"}>CV</BigLink>

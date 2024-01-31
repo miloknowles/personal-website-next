@@ -53,7 +53,7 @@ export default function Home() {
               </Flex>
               <Flex direction="column" gap="3">
                 <Text className="fade-order-4">
-                  Right now, I'm looking for my next role, ideally in the alternative proteins,
+                  Right now, I'm looking for my next role, ideally in alternative proteins,
                   biomanufacturing, or climate tech more broadly.
                   I'm also taking some time to learn about these problem spaces and write more. Stay tuned!
                 </Text>
