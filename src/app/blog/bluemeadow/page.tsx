@@ -259,7 +259,7 @@ export default function Post() {
             </Sidenote>
 
             <Sidenote refId="ref-2-noise" refTag="2">
-              As a sidenote, "life noise" reminds me of the <Link href="https://www.scientificamerican.com/article/lunchtime-leniency/">"lunchtime leniency"</Link> example from
+              "Life noise" reminds me of the <Link href="https://www.scientificamerican.com/article/lunchtime-leniency/">"lunchtime leniency"</Link> example from
               Thinking Fast and Slow, where judges are more likely to grant parole after a snack break.
             </Sidenote>
           </SidenoteAutoLayout>

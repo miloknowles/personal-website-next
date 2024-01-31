@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'Milo Knowles | Writing',
-  description: "Blog posts, papers, and other things I'm thinking about.",
+  description: "Blog posts, papers, and other ideas I'm thinking about.",
 }
 
 
@@ -22,8 +22,11 @@ export default function Page() {
               <Heading size="7">
                 Blog
               </Heading>
+              <Link href="/blog/nonprofit-startups">
+                <Badge>New</Badge> Some types of startups should be nonprofit startups
+              </Link>
               <Link href="/blog/funding-climate">
-                <Badge>New</Badge> How should companies and individuals fund climate mitigation?
+                How should companies and individuals fund climate mitigation?
               </Link>
               <Link href="/blog/bluemeadow">
                 Blue Meadow: What I learned from a year as a solo founder

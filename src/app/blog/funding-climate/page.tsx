@@ -5,6 +5,7 @@ import { Ref, Sidenote, SidenoteAutoLayout } from "@/components/Blog/Sidenotes";
 import ClimateNeutralChart from "./ClimateNeutralChart";
 import Header from "@/components/Blog/Header";
 import { BlogSection, BlogWrapper, ContentContainer, SidenotesContainer } from "@/components/Blog/Wrappers";
+import Feedback from "@/components/Blog/Feedback";
 
 
 export const metadata: Metadata = {
@@ -334,6 +335,8 @@ export default function Page() {
             a meaningful amount of profits on a public good, rather than spending a paltry sum
             on a climate marketing expense.
           </Text>
+
+          <Feedback/>
 
           <Heading size="7" mt="4">
             Acknowledgements
