@@ -57,9 +57,9 @@ role="doc-noteref"><sup>1</sup></a>.</p>
 <p>So when you eat a plant and metabolize its carbohydrates for energy,
 {" "}<code className="text-indigo-200 font-bold">&gt;99%</code>{" "} of the
 original solar energy has already been lost. This seems terribly
-inefficient, but you could argue that energy from sunlight is incredibly
+inefficient, but you could argue that energy from sunlight is incredibly{" "}
 <a
-href="https://blogs.ucl.ac.uk/energy/2015/05/21/fact-checking-elon-musks-blue-square-how-much-solar-to-power-the-us/"><u>abundant</u></a>
+href="https://blogs.ucl.ac.uk/energy/2015/05/21/fact-checking-elon-musks-blue-square-how-much-solar-to-power-the-us/"><u>abundant</u></a>{" "}
 so maybe it's not that big of a deal.</p>
 <h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="trophic-levels">Trophic levels</h3>
@@ -83,7 +83,7 @@ className="text-indigo-200 font-bold">1000{" "} kcal</code>{" "} of edible
 body mass, since they do lots of other energy-consuming things for
 survival (or just for fun). The feed conversion efficiency of animals
 might be <a
-href="https://cbey.yale.edu/our-stories/disrupting-meat"><u>10%</u></a>
+href="https://cbey.yale.edu/our-stories/disrupting-meat"><u>10%</u></a>{" "}
 under "ideal" (read: highly confined) conditions.</p>
 <p>Using the {" "}<code className="text-indigo-200 font-bold">1%</code>{" "}
 efficiency bound on photosynthesis and the {" "}<code
@@ -126,7 +126,7 @@ that livestock must be more carbon intensive than the food they eat.</p>
 <h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="implications-for-climate-change">Implications for climate
 change</h3>
-<p><strong>What I'm building towards is an <em>amoral</em>,
+<p><strong>What I'm building towards is an <em>amoral</em>,{" "}
 <em>mathematical</em> intuition for why food choices matter for climate
 change. Because of Equation 2, the world can support at least an order
 of magnitude more herbivores ($[L=1]$) than carnivores
