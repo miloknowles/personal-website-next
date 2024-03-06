@@ -9,8 +9,8 @@ export function BlogWrapper(props: { children: any }) {
   return (
     <Section
       size={{initial: "1", md: "3"}}
-      pl={{initial: "3", md: "0"}}
-      pr={{initial: "3", md: "0"}}
+      pl={{initial: "3"}}
+      pr={{initial: "3"}}
       id="blog-wrapper"
     >
       <Container size="4">

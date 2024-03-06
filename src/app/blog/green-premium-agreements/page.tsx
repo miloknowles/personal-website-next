@@ -10,7 +10,7 @@ import Feedback from "@/components/Blog/Feedback";
 
 
 export const metadata: Metadata = {
-  title: 'Green premium agreements: could we generalize PPAs to other industries?',
+  title: 'Green premium agreements',
   description: "Power purchase agreements (PPAs) play a huge role in bringing new renewable capacity online, and helping companies reduce their Scope 2 emissions. Could this idea be generalized to industries besides energy?  ",
 }
 
@@ -22,7 +22,7 @@ export default function Post() {
         {/* MAIN CONTENT */}
         <ContentContainer>
           <Header
-            title="Green premium agreements: could we generalize PPAs to other industries?"
+            title="Green premium agreements"
             publishDate="February 1, 2024"
             sidenoteWarning
           />

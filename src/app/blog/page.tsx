@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main>
+    <main className="min-h-screen">
       <Section size={{initial: "1", md: "3"}} pl="3" pr="3">
         <Container size="3">
           <Flex direction="column" gap="7">
@@ -22,11 +22,14 @@ export default function Page() {
               <Heading size="7">
                 Blog
               </Heading>
+              <Link href="/blog/stored-sunlight-part-1">
+                <Badge>New</Badge> Part 1: Making food with air, water, and sunlight
+              </Link>
               <Link href="/blog/green-premium-agreements">
-                <Badge>New</Badge> Green premium agreements: could we generalize PPAs to other industries?
+                Green premium agreements
               </Link>
               <Link href="/blog/nonprofit-startups">
-                <Badge>New</Badge> Some types of startups should be nonprofit startups
+                Some types of startups should be nonprofit startups
               </Link>
               <Link href="/blog/funding-climate">
                 How should companies and individuals fund climate mitigation?
