@@ -22,7 +22,7 @@ const L = (props: { href: string, children: any }) => {
 const Content = () => (
 <div className="flex flex-col flex-grow gap-4 relative text-lg pb-8">
 
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="all-food-comes-from-air-water-and-sunlight">All food comes from air,
 water, and sunlight</h3>
 <p>At a first principles level, all of the food we eat is stored
@@ -36,7 +36,7 @@ Light energy is stored in chemical bonds that we can break to release
 it. Plants also need nitrogen and some minerals, which is why they’ve
 evolved to exchange sugar with symbiotic bacteria for other
 compounds.</p>
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="photosynthesis-isnt-very-efficient">Photosynthesis isn't very
 efficient</h3>
 <p>How efficient are plants at turning light energy into chemical
@@ -61,7 +61,7 @@ inefficient, but you could argue that energy from sunlight is incredibly
 <a
 href="https://blogs.ucl.ac.uk/energy/2015/05/21/fact-checking-elon-musks-blue-square-how-much-solar-to-power-the-us/"><u>abundant</u></a>
 so maybe it's not that big of a deal.</p>
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="trophic-levels">Trophic levels</h3>
 <p>Energy efficiency losses start to become a real problem when we move
 further up the food chain. <strong>I like to think about the food system
@@ -98,7 +98,7 @@ level has an order of magnitude less available energy or <a
 href="https://en.wikipedia.org/wiki/Carrying_capacity"><u>carrying
 capacity</u></a> to sustain life<a href="#fn3" id="fnref3"
 className="footnote-ref" role="doc-noteref"><sup>3</sup></a>.</p>
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="the-land-footprint-of-food">The land footprint of food</h3>
 <p>Because virtually all food energy originates from sunlight hitting a
 leaf, energy requirements and land requirements are effectively
@@ -108,7 +108,7 @@ Because of efficiency losses, a calorie consumed from level $[L + 1]$
 requires 10x more land to product than a calorie consumed from level
 $[L]$<a href="#fn4" id="fnref4" className="footnote-ref"
 role="doc-noteref"><sup>4</sup></a>.</p>
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="the-carbon-footprint-of-food">The carbon footprint of food</h3>
 <p>You're probably aware that animal products, like meat, dairy, and
 eggs, tend to have <a
@@ -123,7 +123,7 @@ className="footnote-ref" role="doc-noteref"><sup>5</sup></a> require <a
 href="https://ourworldindata.org/deforestation"><u>a lot of
 land</u></a>, which is indeed the case. In sum, thermodynamics dictates
 that livestock must be more carbon intensive than the food they eat.</p>
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="implications-for-climate-change">Implications for climate
 change</h3>
 <p><strong>What I'm building towards is an <em>amoral</em>,
@@ -147,7 +147,7 @@ good thing), we'll need more land to produce more calories. That land
 comes from somewhere, and historically it has <a
 href="https://ourworldindata.org/deforestation"><u>cost</u></a> us
 valuable carbon storing ecosystems, like grasslands and forests.</p>
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="eating-closer-to-the-sun">Eating closer to the sun</h3>
 <p><strong>In my view, the math implies only one plausible direction for
 decarbonizing the food system: eating lower on the food
@@ -181,7 +181,7 @@ without animals) recombine plant ingredients from $[L=1]$ to mimic foods
 from $[L \geq 2]$. As alternative proteins approach price and taste
 parity, we’ll be able to eat many of the foods we already enjoy for a
 fraction of the environmental cost.</p>
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2"
 id="outperforming-photosynthesis">Outperforming photosynthesis</h3>
 <p>A plant-based diet is much more energy- and land-efficient than an
 omnivorous diet, but it still runs up against the poor efficiency of

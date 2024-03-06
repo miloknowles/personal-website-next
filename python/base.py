@@ -6,13 +6,13 @@ def action(elem, doc):
 
   if isinstance(elem, pf.Header):
     if elem.level == 1:
-      elem.classes.append("rt-Heading rt-r-size-9 rt-r-weight-bold")
+      elem.classes.append("rt-Heading rt-r-size-9 rt-r-weight-bold pt-2")
     elif elem.level == 2:
-      elem.classes.append("rt-Heading rt-r-size-8 rt-r-weight-bold")
+      elem.classes.append("rt-Heading rt-r-size-8 rt-r-weight-bold pt-2")
     elif elem.level == 3:
-      elem.classes.append("rt-Heading rt-r-size-7 rt-r-weight-bold")
+      elem.classes.append("rt-Heading rt-r-size-7 rt-r-weight-bold pt-2")
     elif elem.level == 4:
-      elem.classes.append("rt-Heading rt-r-size-6 rt-r-weight-bold")
+      elem.classes.append("rt-Heading rt-r-size-6 rt-r-weight-bold pt-2")
 
   # if isinstance(elem, pf.Link):
   #   # Adding the `rt-Link` class will make the link use the highlight color.
