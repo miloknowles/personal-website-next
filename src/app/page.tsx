@@ -34,14 +34,14 @@ export default function Home() {
           <Flex direction="column" gap="6">
             <Flex gap="6"> 
             <Heading size="9" style={{maxWidth: "800px"}} className="fade-order-1">
-              Hi, I'm <span style={{color: "var(--indigo-10)"}}>Milo</span> – a software engineer focused on climate and the food system.
+              Hi, I'm <span style={{color: "var(--indigo-10)"}}>Milo</span> – a software engineer focused on climate change, AI, and the food system.
             </Heading>
             </Flex>
             <Grid columns={{initial: "1", md: "2"}} gap="6" width="auto" className="text-lg">
               <Flex direction="column" gap="3">
                 <Text className="fade-order-2">
-                  I studied computer science and artifical intelligence at MIT, where my research focused
-                  on vision and machine learning for autonomous robots. I've worked on self-driving cars and drones,
+                  I studied computer science and AI at MIT, where my research focused
+                  on vision for autonomous robots. I've worked on self-driving cars and drones,
                   data science for the energy grid, carbon crediting for sustainable foods, and a
                   variety of full-stack web projects.
                 </Text>
@@ -66,7 +66,7 @@ export default function Home() {
                     <RocketIcon/>
                   </CalloutIcon>
                   <CalloutText>
-                    If you're working on a project that benefits the climate or farmed animals and it seems
+                    If you're working on a project that's good for the world and it seems
                     like I could help, please have a low bar for reaching out.
                   </CalloutText>
                 </CalloutRoot>

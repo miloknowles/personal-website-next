@@ -18,12 +18,11 @@ import { cx } from 'class-variance-authority';
 
 export const metadata: Metadata = {
   title: 'Milo Knowles',
-  description: "I'm a software engineer focused on climate and the food system.",
+  description: "I'm a software engineer focused on climate change, AI, and the food system.",
 }
 
 const sans = Inter({ subsets: ['latin'], variable: "--font-sans" });
-// const sans = Poppins({ subsets: ['latin'], variable: "--font-sans", weight: ["200", "300", "400", "500", "600", "700" ] });
-// const sans = Merriweather({ subsets: ['latin'], variable: '--font-sans', weight: ["300", "400", "700"] });
+
 
 export default function RootLayout({
   children,

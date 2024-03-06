@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import _Page from "./client";
+import Content from "./client";
 
 export const metadata: Metadata = {
   title: 'Part 1: Making food with air, water, and sunlight',
@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <_Page/>
+    <Content/>
   )
 }
