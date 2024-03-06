@@ -1,11 +1,9 @@
 "use client";
 
 import { Metadata } from "next";
-import { Link as RadixLink } from "@radix-ui/themes";
+import { Container, Link as RadixLink, Section } from "@radix-ui/themes";
 
-import { BlogSection, BlogWrapper, ContentContainer, SidenotesContainer } from "@/components/Blog/Wrappers";
 import Header from "@/components/Blog/Header";
-import { Ref, Sidenote, SidenoteAutoLayout } from "@/components/Blog/Sidenotes";
 import Feedback from "@/components/Blog/Feedback";
 
 import MathJax from "react-mathjax";
@@ -22,7 +20,7 @@ const L = (props: { href: string, children: any }) => {
 
 
 const Content = () => (
-<div className="flex flex-col flex-grow gap-4 relative text-lg">
+<div className="flex flex-col flex-grow gap-4 relative text-lg pb-8">
 
 <h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold"
 id="all-food-comes-from-air-water-and-sunlight">All food comes from air,
@@ -288,20 +286,22 @@ export default function Page() {
         }
       }
     }>
-      <BlogWrapper>
-        <BlogSection>
-          <ContentContainer>
-            <Header
-              title="Part 1: Making food with air, water, and sunlight"
-              publishDate="March 5, 2024"
-              sidenoteWarning
-            />
-            <Content/>
-            <Feedback/>
-          </ContentContainer>
-          <SidenotesContainer/>
-        </BlogSection>
-      </BlogWrapper>
+      <Section
+        size={{initial: "1", md: "3"}}
+        pl={{initial: "3"}}
+        pr={{initial: "3"}}
+        id="blog-wrapper"
+      >
+        <Container size="3">
+          <Header
+            title="Part 1: Making food with air, water, and sunlight"
+            publishDate="March 5, 2024"
+            sidenoteWarning
+          />
+          <Content/>
+          <Feedback/>
+        </Container>
+      </Section>
     </MathJax.Provider>
   );
 }
