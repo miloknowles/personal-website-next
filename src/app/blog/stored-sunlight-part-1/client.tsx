@@ -114,10 +114,10 @@ id="the-carbon-footprint-of-food">The carbon footprint of food</h3>
 eggs, tend to have <a
 href="https://ourworldindata.org/food-choice-vs-eating-local"><u>high
 carbon footprints</u></a>. That's not a coincidence, and can be largely
-explained by trophic levels. A chicken with a 9:1 caloric efficiency
-wastes 8 out of 9 units of feed, including the emissions that went into
-producing that feed. Cows are even less efficient (<a
-href="https://en.wikipedia.org/wiki/Carrying_capacity"><u>25:1</u></a>),
+explained by trophic levels. (Factory-farmed) chickens are arguably the most efficient
+terrestrial animals, with a <a href="https://iopscience.iop.org/article/10.1088/1748-9326/8/3/034015">12%</a> caloric efficiency.
+This means that they waste 88% of their feed, including the emissions that went into
+producing it. Cows are even less efficient at about 3%,
 which would suggest that cows<a href="#fn5" id="fnref5"
 className="footnote-ref" role="doc-noteref"><sup>5</sup></a> require <a
 href="https://ourworldindata.org/deforestation"><u>a lot of
@@ -161,8 +161,8 @@ Reforesting that land, by the way, would <a
 href="https://ourworldindata.org/carbon-opportunity-costs-food"><u>remove
 an estimated 800 gigatons of CO2</u></a> from the atmosphere! Another
 important <a
-href="https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0000010"><u>study</u></a>
-by Eisen &amp; Brown found that phasing out animal agriculture, over a
+href="https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0000010"><u>study</u></a> by
+Eisen &amp; Brown found that phasing out animal agriculture, over a
 period of 15 years, would effectively pause global warming for 30
 years.</p>
 <p>We should be very skeptical of any climate solution that promises
@@ -187,8 +187,7 @@ id="outperforming-photosynthesis">Outperforming photosynthesis</h3>
 omnivorous diet, but it still runs up against the poor efficiency of
 photosynthesis (well below 1%, as we saw above). <strong>Is
 photosynthetic efficiency a hard upper bound on the efficiency of food
-production? Short answer: no!</strong> In the next post, I’ll explore a
-NASA-inspired food production technology that can outperform the
+production? Short answer: no!</strong> In the next post, I’ll explore food production technologies that can outperform the
 efficiency of photosynthesis.</p>
 <section id="footnotes"
 className="footnotes footnotes-end-of-document pt-8 text-sm"
