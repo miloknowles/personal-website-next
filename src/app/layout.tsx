@@ -44,7 +44,6 @@ export default function RootLayout({
         <Theme appearance="dark" accentColor="indigo" radius="medium">
           <Navigation/>
           {children}
-          <Footer/>
         </Theme>
       </body>
     </html>

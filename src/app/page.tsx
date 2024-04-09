@@ -29,7 +29,7 @@ const ResponsiveImage = (props: { src: string, alt: string, style: any, classNam
 export default function Home() {
   return (
     <main className="">
-      <Section size={{initial: "1", md: "2", lg: "3"}} pl="3" pr="3" pb="6">
+      <Section size={{initial: "1", md: "2", lg: "3"}} pl="3" pr="3" pb="9">
         <Container size="4">
           <Flex direction="column" gap="6">
             <Flex gap="6"> 
