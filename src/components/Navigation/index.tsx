@@ -58,7 +58,7 @@ export default function Navigation() {
               <BigLink href="/" onClick={onClickLink}>About</BigLink>
               <BigLink href="/blog" onClick={onClickLink}>Writing</BigLink>
               <BigLink href="https://triathlon-tools.vercel.app/" target="_blank" onClick={onClickLink}>Triathlon</BigLink>
-              <BigLink href="https://resume.io/r/CE0cC6CzA" onClick={onClickLink} target={"_blank"}>CV</BigLink>
+              <BigLink href="https://resume.io/r/5C7pJxyMP" onClick={onClickLink} target={"_blank"}>CV</BigLink>
               <Flex>
                 <Socials size={64} color="white"/>
               </Flex>
