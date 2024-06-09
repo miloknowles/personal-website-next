@@ -15,7 +15,7 @@ if __name__ == "__main__":
   ols: bs4.ResultSet = fn.find_all('ol')
 
   for ol in ols:
-    ol['class'] = ["list-decimal pl-4 flex flex-column gap-3"]
+    ol['class'] = ["list-decimal pl-4 flex flex-col gap-3"]
 
   # html = soup.prettify()
   html = str(soup)

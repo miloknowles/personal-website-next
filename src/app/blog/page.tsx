@@ -22,8 +22,11 @@ export default function Page() {
               <Heading size="7">
                 Blog
               </Heading>
+              <Link href="/blog/artificial-photosynthesis-part-2">
+                Part 2: The artificial photosynthesis revolution
+              </Link>
               <Link href="/blog/stored-sunlight-part-1">
-                <Badge>New</Badge> Part 1: Making food with air, water, and sunlight
+                Part 1: Making food with air, water, and sunlight
               </Link>
               <Link href="/blog/green-premium-agreements">
                 Green premium agreements
