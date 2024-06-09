@@ -1,23 +1,11 @@
 "use client";
 
-import { Metadata } from "next";
 import { Container, Link as RadixLink, Section } from "@radix-ui/themes";
 
 import Header from "@/components/Blog/Header";
 import Feedback from "@/components/Blog/Feedback";
 
 import MathJax from "react-mathjax";
-
-
-export const metadata: Metadata = {
-  title: 'Part 1: Making food with air, water, and sunlight',
-  description: "At a first principles level, all of the food we eat is stored sunlight, assembled from air and water.",
-}
-
-const L = (props: { href: string, children: any }) => {
-  return <RadixLink href={props.href} target="_blank">{props.children}</RadixLink>
-}
-
 
 const Content = () => (
 <div className="flex flex-col flex-grow gap-4 relative text-lg pb-8">
@@ -262,7 +250,6 @@ role="doc-backlink">↩︎</a></p>
 </div></li>
 </ol>
 </section>
-
 </div>
 )
 
