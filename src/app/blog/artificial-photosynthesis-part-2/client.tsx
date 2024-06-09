@@ -263,7 +263,7 @@ long-term solution for producing proteins in my view.</p>
 <p>Unless you’re the Liver King or Jordan Peterson, the majority of your
 calories don’t come from protein. Staple cereal crops, like maize,
 wheat, rice, and barley are the foundation of the human food system and
-supply <a href="https://www.wri.org/insights/crop-expansion-food-security-trends#:~:text=Just%2010%20global%20crops%20provide,harvested%20for%20direct%20food%20use."><u>most</u></a>
+supply <a href="https://www.wri.org/insights/crop-expansion-food-security-trends#:~:text=Just%2010%20global%20crops%20provide,harvested%20for%20direct%20food%20use."><u>most</u></a>{" "}
 of our calories in the form of carbohydrates. I don’t have anything
 against cereals (and happily eat a lot of them), but wanted to explore
 how we might create an <a href="https://www.frontiersin.org/articles/10.3389/fsufs.2020.00090/full#:~:text=In%20contrast%2C%20the%20artificial%20synthesis,by%20several%20orders%20of%20magnitude."><u>artificial
@@ -308,7 +308,7 @@ protein engineering to improve their <a href="https://pubmed.ncbi.nlm.nih.gov/33
 lifetime</u></a>. Nonetheless, companies like <a href="https://solugen.com/"><u>Solugen</u></a> are an existence proof
 that you can make things cheaply and at an industrial scale using
 enzymes<a className="footnote-ref" href="#fn12" id="fnref12" role="doc-noteref"><sup>12</sup></a>.</p>
-<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2" id="food-superabundance">Food superabundance?</h3>
+<h3 className="rt-Heading rt-r-size-7 rt-r-weight-bold pt-2" id="food-superabundance">Food superabundance</h3>
 <p>By now, I hope to have convinced you that solar-to-food pathways are
 at least worthy of more exploration. If we can turn electricity into
 food, I can’t see a first principle reason why supplying cheap and
