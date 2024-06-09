@@ -4,7 +4,7 @@ import Content from "./client";
 
 export const metadata: Metadata = {
   title: 'Part 2: The artificial photosynthesis revolution',
-  description: "At a first principles level, all of the food we eat is stored sunlight, assembled from air and water.",
+  description: "If we can turn electricity into food, I can’t see a first principle reason why supplying cheap and nutritious food to every person on Earth should be difficult; there is more than enough energy and carbon to go around.",
 }
 
 export default function Page() {
